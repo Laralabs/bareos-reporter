@@ -32,7 +32,7 @@
     <div class="container main-logo-wrap">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <img src="/images/bareos-full-logo.png" alt="Bareos Open Source Data Protection" href="http://www.bareos.org/" />
+                <a href="http://www.bareos.org/" style="text-decoration: none;"><img src="/images/bareos-full-logo.png" alt="Bareos Open Source Data Protection" /></a>
             </div>
         </div>
         <div class="heading text-center">
