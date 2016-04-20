@@ -31,6 +31,9 @@ Route::group(['middleware' => 'web'], function () {
     $this->get('/', 'Auth\AuthController@index');
 
     //Dashboard Route
+    $this->get('home', function() {
+        return redirect('dashboard');
+    });
     $this->get('dashboard', 'DashboardController@index');
 });
  
