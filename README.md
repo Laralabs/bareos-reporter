@@ -2,7 +2,7 @@
 
 Web application for managing and automating Bareos backup email reports in an easier plus more readable way.
 
-### Crafted by Laralabs using the Laravel PHP Framework
+Crafted by Laralabs using the Laravel PHP Framework.
 
 ## License
 
