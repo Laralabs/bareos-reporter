@@ -44,7 +44,13 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
