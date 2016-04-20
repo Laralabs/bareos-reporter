@@ -1,5 +1,9 @@
 @extends('layouts.hidden')
 
+@section('head')
+    <title>Bareos Reporter / Reset Password</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
