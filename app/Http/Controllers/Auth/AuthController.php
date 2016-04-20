@@ -73,18 +73,6 @@ class AuthController extends Controller
         ]);
     }
 
-    public function index()
-    {
-        if(Auth::check() === true)
-        {
-            return redirect('dashboard');
-        }
-        else
-        {
-            return view('auth.login');
-        }
-    }
-
     public function register()
     {
         $userData = array(

@@ -28,7 +28,7 @@ Route::group(['middleware' => 'web'], function () {
     $this->post('password/reset', 'Auth\PasswordController@reset');
 
 
-    $this->get('/', 'Auth\AuthController@index');
+    $this->get('/', 'IndexController@index');
 
     //Dashboard Route
     $this->get('home', function() {
