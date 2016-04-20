@@ -5749,6 +5749,92 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/* Typography */
+@font-face {
+  font-family: 'karlabold';
+  src: url("/fonts/karla/karla-bold-webfont.eot");
+  src: url("/fonts/karla/karla-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/karla/karla-bold-webfont.woff2") format("woff2"), url("/fonts/karla/karla-bold-webfont.woff") format("woff"), url("/fonts/karla/karla-bold-webfont.ttf") format("truetype"), url("/fonts/karla/karla-bold-webfont.svg#karlabold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'karlabolditalic';
+  src: url("/fonts/karla/karla-bolditalic-webfont.eot");
+  src: url("/fonts/karla/karla-bolditalic-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/karla/karla-bolditalic-webfont.woff2") format("woff2"), url("/fonts/karla/karla-bolditalic-webfont.woff") format("woff"), url("/fonts/karla/karla-bolditalic-webfont.ttf") format("truetype"), url("/fonts/karla/karla-bolditalic-webfont.svg#karlabolditalic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'karlaitalic';
+  src: url("/fonts/karla/karla-italic-webfont.eot");
+  src: url("/fonts/karla/karla-italic-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/karla/karla-italic-webfont.woff2") format("woff2"), url("/fonts/karla/karla-italic-webfont.woff") format("woff"), url("/fonts/karla/karla-italic-webfont.ttf") format("truetype"), url("/fonts/karla/karla-italic-webfont.svg#karlaitalic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'karlaregular';
+  src: url("/fonts/karla/karla-regular-webfont.eot");
+  src: url("/fonts/karla/karla-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/karla/karla-regular-webfont.woff2") format("woff2"), url("/fonts/karla/karla-regular-webfont.woff") format("woff"), url("/fonts/karla/karla-regular-webfont.ttf") format("truetype"), url("/fonts/karla/karla-regular-webfont.svg#karlaregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_problack';
+  src: url("/fonts/sourcesanspro/sourcesanspro-black-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-black-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-black-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-black-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-black-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-black-webfont.svg#source_sans_problack") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_probold';
+  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-bold-webfont.svg#source_sans_probold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_proitalic';
+  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-italic-webfont.svg#source_sans_proitalic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_prolight';
+  src: url("/fonts/sourcesanspro/sourcesanspro-light-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-light-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-light-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-light-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-light-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-light-webfont.svg#source_sans_prolight") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_proregular';
+  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-regular-webfont.svg#source_sans_proregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'source_sans_prosemibold';
+  src: url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.eot");
+  src: url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.woff") format("woff"), url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.ttf") format("truetype"), url("/fonts/sourcesanspro/sourcesanspro-semibold-webfont.svg#source_sans_prosemibold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+body {
+  font-family: 'source_sans_proregular'; }
+
+h1 {
+  font-family: 'karlabold'; }
+
+h2 {
+  font-family: 'karlabold'; }
+
+h3 {
+  font-family: 'karlabold'; }
+
+h4 {
+  font-family: 'karlabold'; }
+
 .main-logo-wrap {
   margin-top: 30px;
   margin-bottom: 30px; }
@@ -5757,5 +5843,12 @@ button.close {
     .main-logo-wrap .row div img {
       width: 400px;
       max-width: 100%; }
+
+.navbar-header .bareos-logo {
+  float: left;
+  margin-right: 5px; }
+
+.navbar-header .navbar-brand {
+  font-family: "karlaregular" !important; }
 
 /*# sourceMappingURL=app.css.map */
