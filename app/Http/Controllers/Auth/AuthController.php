@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Mockery\Exception;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -49,7 +52,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'username' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -64,9 +67,54 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function index()
+    {
+        if(Auth::check() === true)
+        {
+            return redirect('dashboard');
+        }
+        else
+        {
+            return view('auth.login');
+        }
+    }
+
+    public function register()
+    {
+        $userData = array(
+            'username'      =>  Input::get('username'),
+            'email'         =>  Input::get('email'),
+            'password'      =>  Input::get('password')
+        );
+
+        if(validator($userData)) {
+
+            $user = $this->create($userData);
+            $user->save();
+
+            return redirect('/')->with('success', 'User created successfully!');
+        }
+        else
+        {
+            return redirect('/')->with('error', 'Unable to create user');
+        }
+    }
+
+    public function login()
+    {
+        if(Auth::attempt(['username' => Input::get('username'), 'password' => Input::get('password')]))
+        {
+            return redirect('/dashboard')->with('success', 'Login successful!');
+        }
+        else
+        {
+            return redirect('/')->with('error', 'Unable to login. Please check your username and password.');
+        }
     }
 }

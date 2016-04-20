@@ -1,5 +1,9 @@
 @extends('layouts.hidden')
 
+@section('head')
+    <title>Bareos Reporter / Login</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -10,14 +14,14 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <div class="input-group">
                                     <span class="input-group-addon" id="username-addon"><span class="fa fa-user" style="padding-right: 3px;"></span></span>
-                                    <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('email') }}">
+                                    <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}">
                                     @if ($errors->has('username'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -27,7 +31,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <div class="input-group">
-                                    <span class="input-group-addon" id="username-addon"><span class="fa fa-key"></span></span>
+                                    <span class="input-group-addon" id="password-addon"><span class="fa fa-key"></span></span>
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -43,6 +47,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
