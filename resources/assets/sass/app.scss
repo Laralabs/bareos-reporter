@@ -435,6 +435,27 @@ nav.sidebar, .main{
     }
   }
 
+  /* Content Containers */
+
+  .content-container {
+    padding-left: 53px;
+    padding-top: 27px;
+    width: 100% !important;
+
+    .row {
+      margin: 0 !important;
+    }
+
+    .col-md-12 {
+      float: left;
+      width: 100%;
+    }
+  }
+
+  nav.sidebar:hover + .content-container {
+      padding-left: 200px;
+  }
+
   .forAnimate{
     opacity: 0;
   }
@@ -482,6 +503,18 @@ nav.sidebar, .main{
 
   nav.sidebar .forAnimate{
     opacity: 1;
+  }
+
+  /* Content Containers */
+
+  .content-container {
+    padding-left: 200px;
+    padding-top: 27px;
+    width: 100% !important;
+
+    .row {
+      margin: 0 !important;
+    }
   }
 }
 

@@ -6002,6 +6002,18 @@ nav.sidebar, .main {
           max-width: 100%; }
     nav.sidebar:hover .small-nav {
       display: none; }
+  /* Content Containers */
+  .content-container {
+    padding-left: 53px;
+    padding-top: 27px;
+    width: 100% !important; }
+    .content-container .row {
+      margin: 0 !important; }
+    .content-container .col-md-12 {
+      float: left;
+      width: 100%; }
+  nav.sidebar:hover + .content-container {
+    padding-left: 200px; }
   .forAnimate {
     opacity: 0; } }
 
@@ -6024,7 +6036,14 @@ nav.sidebar, .main {
       display: none;
       float: right; }
   nav.sidebar .forAnimate {
-    opacity: 1; } }
+    opacity: 1; }
+  /* Content Containers */
+  .content-container {
+    padding-left: 200px;
+    padding-top: 27px;
+    width: 100% !important; }
+    .content-container .row {
+      margin: 0 !important; } }
 
 nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover, nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
   color: #5A5A5A; }
