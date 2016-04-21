@@ -12,6 +12,7 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="/css/app.css" >
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" >
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.css" >
 
     <style>
         .fa-btn {
@@ -59,5 +60,6 @@
     <!-- JavaScripts -->
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/dataTables.js"></script>
 </body>
 </html>
