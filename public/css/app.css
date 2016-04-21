@@ -5844,11 +5844,195 @@ h4 {
       width: 400px;
       max-width: 100%; }
 
-.navbar-header .bareos-logo {
-  float: left;
-  margin-right: 5px; }
+/* Globals */
+.clear {
+  clear: both; }
 
-.navbar-header .navbar-brand {
-  font-family: "karlaregular" !important; }
+/* Globals End */
+body, html {
+  height: 100%; }
+
+.navbar-brand-wrap {
+  border-bottom: 1px solid #DDDDDD; }
+  .navbar-brand-wrap .logo-wrap {
+    float: left; }
+    .navbar-brand-wrap .logo-wrap .navbar-brand {
+      line-height: 26px !important; }
+    .navbar-brand-wrap .logo-wrap .bareos-logo {
+      float: left;
+      display: inline;
+      padding: 10px 0 10px 6px; }
+    .navbar-brand-wrap .logo-wrap .app-name {
+      font-family: "karlabold" !important;
+      font-size: 22px;
+      color: #555555;
+      display: inline;
+      padding: 20px 0 0 5px;
+      text-decoration: none;
+      width: 55% !important;
+      float: left;
+      text-align: left !important;
+      text-transform: uppercase; }
+  .navbar-brand-wrap .mobile-nav-toggle {
+    float: right; }
+    .navbar-brand-wrap .mobile-nav-toggle .navbar-toggle {
+      margin-top: 15px !important; }
+
+nav.sidebar, .main {
+  transition: margin 200ms ease-out; }
+
+.navbar-default {
+  background-color: #FFFFFF !important;
+  border-color: #DDDDDD !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important; }
+
+.navbar-nav > li > a {
+  color: #555555;
+  letter-spacing: 1px;
+  padding-left: 15px; }
+
+.navbar-default .navbar-nav > li > a {
+  color: #555555; }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #222222; }
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: #FDFDFD !important;
+  border-right: 1px solid #DDDDDD; }
+
+.main {
+  padding: 10px 10px 0 10px; }
+
+@media (max-width: 764px) {
+  .dropdown-menu {
+    background-color: #F3F5F8; }
+  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: transparent !important; }
+  .navbar-nav > li > .dropdown-menu {
+    border-radius: 0 !important; }
+  nav.sidebar .navbar-nav .open .dropdown-menu {
+    background-color: #F3F5F8 !important; }
+  .small-nav {
+    display: none !important; } }
+
+@media (min-width: 765px) {
+  .main {
+    position: absolute;
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    float: right; }
+  .navback {
+    position: fixed;
+    top: 0;
+    bottom: -120px;
+    z-index: 1;
+    background-color: #FFFFFF;
+    border-right: 1px #DDDDDD solid;
+    width: 200px; }
+  .navtop {
+    position: relative;
+    float: left;
+    z-index: 9999;
+    width: 200px; }
+  .dropdown-menu {
+    width: 199px;
+    border-right: 1px solid #DDDDDD !important; }
+  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: transparent !important; }
+  .navbar-nav > li > .dropdown-menu {
+    border-radius: 0 !important; }
+  nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover, nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #5A5A5A; }
+  nav.sidebar:hover + .main {
+    margin-left: 200px; }
+  nav.sidebar.navbar.sidebar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: 0px; }
+  nav.sidebar .navbar-brand, nav.sidebar .navbar-header {
+    text-align: center;
+    width: 100%;
+    margin-left: 0px; }
+  nav.sidebar a {
+    padding-right: 19px; }
+  nav.sidebar .navbar-nav > li {
+    border-bottom: 1px #DDDDDD solid;
+    border-right: 0 !important; }
+  nav.sidebar .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: #F3F5F8 !important;
+    border: 0;
+    box-shadow: none; }
+  nav.sidebar .navbar-collapse, nav.sidebar .container-fluid {
+    padding: 0 0px 0 0px; }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #777; }
+  nav.sidebar {
+    width: 200px;
+    height: 100vh;
+    margin-left: -147px;
+    float: left;
+    margin-bottom: 0px; }
+    nav.sidebar .navtop .navbar-brand-wrap .logo-wrap {
+      float: right; }
+      nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .navbar-brand-app-name {
+        display: none; }
+      nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .bareos-logo {
+        float: right; }
+        nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .bareos-logo img {
+          max-width: 100%; }
+    nav.sidebar .small-nav {
+      display: inline;
+      float: right; }
+  nav.sidebar li {
+    width: 100%; }
+  nav.sidebar:hover {
+    margin-left: 0px; }
+    nav.sidebar:hover .navtop .navbar-brand-wrap .logo-wrap {
+      float: left; }
+      nav.sidebar:hover .navtop .navbar-brand-wrap .logo-wrap .navbar-brand-app-name {
+        display: inline; }
+      nav.sidebar:hover .navtop .navbar-brand-wrap .logo-wrap .bareos-logo {
+        float: left; }
+        nav.sidebar:hover .navtop .navbar-brand-wrap .logo-wrap .bareos-logo img {
+          max-width: 100%; }
+    nav.sidebar:hover .small-nav {
+      display: none; }
+  .forAnimate {
+    opacity: 0; } }
+
+@media (min-width: 1330px) {
+  .main {
+    width: calc(100% - 200px);
+    margin-left: 200px; }
+  nav.sidebar {
+    margin-left: 0px;
+    float: left; }
+    nav.sidebar .navtop .navbar-brand-wrap .logo-wrap {
+      float: left; }
+      nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .navbar-brand-app-name {
+        display: inline; }
+      nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .bareos-logo {
+        float: left; }
+        nav.sidebar .navtop .navbar-brand-wrap .logo-wrap .bareos-logo img {
+          max-width: 100%; }
+    nav.sidebar .small-nav {
+      display: none;
+      float: right; }
+  nav.sidebar .forAnimate {
+    opacity: 1; } }
+
+nav.sidebar .navbar-nav .open .dropdown-menu > li > a:hover, nav.sidebar .navbar-nav .open .dropdown-menu > li > a:focus {
+  color: #5A5A5A; }
+
+nav:hover .forAnimate {
+  opacity: 1; }
+
+section {
+  padding-left: 15px; }
 
 /*# sourceMappingURL=app.css.map */
