@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+/**
+ * Bareos Reporter
+ * Application for managing Bareos Backup Email Reports
+ *
+ * Directors Controller
+ *
+ * @license The MIT License (MIT) See: LICENSE file
+ * @copyright Copyright (c) 2016 Matt Clinton
+ * @author Matt Clinton <matt@laralabs.uk>
+ */
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -41,7 +53,7 @@
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard<i class="fa fa-tachometer small-nav"></i></a></li>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
+                    <li><a href="{{ url('/directors') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates<i class="fa fa-file small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts<i class="fa fa-users small-nav"></i></a></li>

@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+/**
+ * Bareos Reporter
+ * Application for managing Bareos Backup Email Reports
+ *
+ * Directors Controller
+ *
+ * @license The MIT License (MIT) See: LICENSE file
+ * @copyright Copyright (c) 2016 Matt Clinton
+ * @author Matt Clinton <matt@laralabs.uk>
+ */
+?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
