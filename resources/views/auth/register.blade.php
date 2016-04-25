@@ -28,6 +28,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="name-addon"><span class="fa fa-user" style="padding-right: 3px;"></span></span>
+                                    <input type="text" class="form-control" name="name" placeholder="Full Name" value="{{ old('name') }}">
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <div class="input-group">
