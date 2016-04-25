@@ -6015,7 +6015,10 @@ nav.sidebar, .main {
   nav.sidebar:hover + .content-container {
     padding-left: 200px; }
   .forAnimate {
-    opacity: 0; } }
+    opacity: 0; }
+  /* Directors Section */
+  .add-button {
+    margin-bottom: 15px; } }
 
 @media (min-width: 1330px) {
   .main {

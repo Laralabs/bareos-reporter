@@ -35,5 +35,9 @@ Route::group(['middleware' => 'web'], function () {
         return redirect('dashboard');
     });
     $this->get('dashboard', 'DashboardController@index');
+
+    //Directors Routes
+    $this->get('directors', 'DirectorsController@index');
+
 });
  

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Bareos Reporter
+ * Application for managing Bareos Backup Email Reports
+ *
+ * Directors Model
+ *
+ * @license The MIT License (MIT) See: LICENSE file
+ * @copyright Copyright (c) 2016 Matt Clinton
+ * @author Matt Clinton <matt@laralabs.uk>
+ */
 
 namespace App;
 
@@ -12,7 +22,7 @@ class Directors extends Model
      * @var array
      */
     protected $fillable = [
-        'director_name', 'ip_address', 'dir_password', 'catalog_id'
+        'director_name', 'ip_address', 'director_port', 'catalog_id'
     ];
 
     public static function find($id) {
