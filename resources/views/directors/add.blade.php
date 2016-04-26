@@ -61,27 +61,27 @@
                             <div id="mysql-wrap">
                                 <div class="form-group">
                                     <label for="host">Host:</label>
-                                    <input type="text" class="form-control" name="host" required />
+                                    <input type="text" class="form-control" name="host[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="port">Port:</label>
-                                    <input type="text" class="form-control" name="port" value="3306" placeholder="3306" required />
+                                    <input type="text" class="form-control" name="port[]" placeholder="3306" />
                                 </div>
                                 <div class="form-group">
                                     <label for="database">Database:</label>
-                                    <input type="text" class="form-control" name="database" required />
+                                    <input type="text" class="form-control" name="database[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" name="username" required />
+                                    <input type="text" class="form-control" name="username[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" name="password" />
+                                    <input type="password" class="form-control" name="password[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="charset">Charset:</label>
-                                    <select id="charset-select" class="selectpicker form-control" name="charset" required>
+                                    <select id="charset-select" class="selectpicker form-control" name="charset[]">
                                         @if(!empty($mysql_charsets))
                                             @foreach($mysql_charsets as $charset)
                                                 @if($charset->CHARACTER_SET_NAME == 'utf8')
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="collation">Collation:</label>
-                                    <select id="collation-select" class="selectpicker form-control" name="collation" required>
+                                    <select id="collation-select" class="selectpicker form-control" name="collation[]">
                                         @if(!empty($mysql_collations))
                                             @foreach($mysql_collations as $collation)
                                                 @if($collation->COLLATION_NAME == 'utf8_general_ci')
@@ -113,11 +113,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="prefix">Prefix:</label>
-                                    <input type="text" class="form-control" name="prefix" />
+                                    <input type="text" class="form-control" name="prefix[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="strict">SQL Strict:</label>
-                                    <select id="strict-select" class="selectpicker form-control" name="strict" required >
+                                    <select id="strict-select" class="selectpicker form-control" name="strict[]" >
                                         <option value="false" selected="selected">No</option>
                                         <option value="true">Yes</option>
                                     </select>
@@ -127,27 +127,27 @@
                             <div id="pgsql-wrap">
                                 <div class="form-group">
                                     <label for="host">Host:</label>
-                                    <input type="text" class="form-control" name="host" required />
+                                    <input type="text" class="form-control" name="host[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="port">Port:</label>
-                                    <input type="text" class="form-control" name="port" required />
+                                    <input type="text" class="form-control" name="port[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="database">Database:</label>
-                                    <input type="text" class="form-control" name="database" required />
+                                    <input type="text" class="form-control" name="database[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" name="username" required />
+                                    <input type="text" class="form-control" name="username[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" name="password" />
+                                    <input type="password" class="form-control" name="password[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="charset">Charset:</label>
-                                    <select id="charset-select" class="selectpicker form-control" name="charset" required>
+                                    <select id="charset-select" class="selectpicker form-control" name="charset[]">
                                         @if(!empty($pgsql_charsets))
                                             @foreach($pgsql_charsets as $charset)
                                                 @if($charset->name == 'UTF8')
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="prefix">Prefix:</label>
-                                    <input type="text" class="form-control" name="prefix" />
+                                    <input type="text" class="form-control" name="prefix[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="schema">Schema:</label>
@@ -173,11 +173,11 @@
                             <div id="sqlite-wrap">
                                 <div class="form-group">
                                     <label for="database">Database Path:</label>
-                                    <input type="text" class="form-control" name="database" required />
+                                    <input type="text" class="form-control" name="database[]" />
                                 </div>
                                 <div class="form-group">
                                     <label for="prefix">Prefix:</label>
-                                    <input type="text" class="form-control" name="prefix" />
+                                    <input type="text" class="form-control" name="prefix[]" />
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 30px;">

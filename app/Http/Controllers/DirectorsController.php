@@ -12,12 +12,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Catalogs;
 use App\Directors;
 use App\MysqlCollations;
 use App\PgsqlCharsets;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Mockery\Exception;
 
@@ -81,19 +83,37 @@ class DirectorsController extends Controller
     {
         // Director Details
         $director_name      =   Input::get('director_name');
-        $dir_ip_address     =   Input::get('ip_address');
+        $dir_ip_address     =   Input::get('director_ip');
         $director_port      =   Input::get('director_port');
 
         // Catalog Details
         $driver             =   Input::get('driver');
-        $host               =   Input::get('port');
-        $database           =   Input::get('database');
-        $username           =   Input::get('username');
-        $password           =   Input::get('password');
-        $charset            =   Input::get('charset');
-        $collation          =   Input::get('collation');
-        $prefix             =   Input::get('prefix');
-        $strict             =   Input::get('strict');
+        $host               =   array_filter(Input::get('host'));
+        $port               =   array_filter(Input::get('port'));
+        $database           =   array_filter(Input::get('database'));
+        $username           =   array_filter(Input::get('username'));
+        $password           =   array_filter(Input::get('password'));
+        if(!empty($password))
+        {
+            $enc_password   =   Crypt::encrypt($password);
+        }
+        else
+        {
+            $enc_password   =   '';
+        }
+        $enc_password       =   Crypt::encrypt($password);
+        $charset            =   array_filter(Input::get('charset'));
+        $collation          =   array_filter(Input::get('collation'));
+        $prefix             =   array_filter(Input::get('prefix'));
+        if(empty($prefix))
+        {
+            $prefix         =   '';
+        }
+        else
+        {
+            $prefix         =   $prefix[0];
+        }
+        $strict             =   array_filter(Input::get('strict'));
         $engine             =   Input::get('engine');
         $schema             =   Input::get('schema');
 
@@ -111,7 +131,27 @@ class DirectorsController extends Controller
 
                 if($driver == 'mysql')
                 {
+                    $catalog = Catalogs::create(array(
+                        'director_id'       =>  $director_id,
+                        'driver'            =>  $driver,
+                        'host'              =>  $host[0],
+                        'port'              =>  $port[0],
+                        'database'          =>  $database[0],
+                        'username'          =>  $username[0],
+                        'password'          =>  $enc_password,
+                        'charset'           =>  $charset[0],
+                        'collation'         =>  $collation[0],
+                        'prefix'            =>  $prefix,
+                        'strict'            =>  $strict[0],
+                        'engine'            =>  $engine
+                    ));
 
+                    $catalog->save();
+
+                    $director = Directors::find($director_id);
+
+                    $director->catalog_id = $catalog->id;
+                    $director->save();
                 }
                 elseif($driver == 'pgsql')
                 {
