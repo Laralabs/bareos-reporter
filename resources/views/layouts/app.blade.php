@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css" >
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" >
     <link rel="stylesheet" type="text/css" href="/css/dataTables.css" >
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css" >
 
     <style>
         .fa-btn {
@@ -73,5 +74,7 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/dataTables.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="/js/director.js"></script>
 </body>
 </html>

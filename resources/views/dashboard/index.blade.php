@@ -3,7 +3,7 @@
  * Bareos Reporter
  * Application for managing Bareos Backup Email Reports
  *
- * Directors Controller
+ * Dashboard Index
  *
  * @license The MIT License (MIT) See: LICENSE file
  * @copyright Copyright (c) 2016 Matt Clinton
@@ -21,7 +21,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dashboard</h3>
+                </div>
 
                 <div class="panel-body">
                     Not got much information to show here yet

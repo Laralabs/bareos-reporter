@@ -29,6 +29,11 @@ elixir(function(mix) {
     /* Bootstrap JS */
     mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.js', 'public/js');
 
+    /* Bootstrap Select, Dropdown Replacement */
+
+    mix.copy('node_modules/bootstrap-select/dist/css/bootstrap-select.css', 'public/css');
+    mix.copy('node_modules/bootstrap-select/js/bootstrap-select.js', 'public/js');
+
     /* DataTables Tasks */
     elixir(function(mix) {
         mix.scripts([

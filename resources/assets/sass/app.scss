@@ -168,6 +168,21 @@ h4 {
   clear: both;
 }
 
+hr {
+  margin-top: 10px !important;
+}
+
+.btn {
+  letter-spacing: 1px !important;
+}
+
+.form-add-director {
+
+  div[class*="col-"] {
+    padding: 0 !important;
+  }
+}
+
 /* Globals End */
 
 //SIDEBAR
@@ -273,6 +288,12 @@ nav.sidebar, .main{
 
   .small-nav {
     display: none !important;
+  }
+
+  /* Directors Section */
+  .add-button {
+    margin-bottom: 15px;
+    text-align: right;
   }
 }
 @media (min-width: 765px) {
@@ -463,6 +484,7 @@ nav.sidebar, .main{
   /* Directors Section */
   .add-button {
     margin-bottom: 15px;
+    text-align: right;
   }
 }
 

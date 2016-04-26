@@ -5848,6 +5848,15 @@ h4 {
 .clear {
   clear: both; }
 
+hr {
+  margin-top: 10px !important; }
+
+.btn {
+  letter-spacing: 1px !important; }
+
+.form-add-director div[class*="col-"] {
+  padding: 0 !important; }
+
 /* Globals End */
 body, html {
   height: 100%; }
@@ -5916,7 +5925,11 @@ nav.sidebar, .main {
   nav.sidebar .navbar-nav .open .dropdown-menu {
     background-color: #F3F5F8 !important; }
   .small-nav {
-    display: none !important; } }
+    display: none !important; }
+  /* Directors Section */
+  .add-button {
+    margin-bottom: 15px;
+    text-align: right; } }
 
 @media (min-width: 765px) {
   .main {
@@ -6018,7 +6031,8 @@ nav.sidebar, .main {
     opacity: 0; }
   /* Directors Section */
   .add-button {
-    margin-bottom: 15px; } }
+    margin-bottom: 15px;
+    text-align: right; } }
 
 @media (min-width: 1330px) {
   .main {

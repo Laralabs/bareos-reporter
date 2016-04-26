@@ -38,6 +38,10 @@ Route::group(['middleware' => 'web'], function () {
 
     //Directors Routes
     $this->get('directors', 'DirectorsController@index');
+    $this->get('directors/add', 'DirectorsController@add');
+    $this->get('directors/edit/{id}', 'DirectorsController@edit');
+    $this->post('directors/create', 'DirectorsController@create');
+    $this->post('directors/save/{id}', 'DirectorsController@save');
 
 });
  

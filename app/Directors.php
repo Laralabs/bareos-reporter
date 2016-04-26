@@ -17,6 +17,13 @@ use Illuminate\Database\Eloquent\Model;
 class Directors extends Model
 {
     /**
+     * The table associated to model
+     *
+     * @var string
+     */
+    protected $table = 'directors';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

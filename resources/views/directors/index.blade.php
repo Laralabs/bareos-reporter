@@ -3,7 +3,7 @@
  * Bareos Reporter
  * Application for managing Bareos Backup Email Reports
  *
- * Directors Controller
+ * View Directors
  *
  * @license The MIT License (MIT) See: LICENSE file
  * @copyright Copyright (c) 2016 Matt Clinton
@@ -21,14 +21,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Directors</div>
+                <div class="panel-heading">
+                     <h3 class="panel-title">Directors</h3>
+                </div>
 
                 <div class="panel-body">
                     <div class="add-button">
-                        <form class="form-add-director" method="POST" action="/directors/add">
-                            <button type="submit" class="btn btn-primary" name="action" value="add">Add Director</button>
-                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
-                        </form>
+                        <a href="/directors/add"><button class="btn btn-primary" name="action" value="add">Add Director</button></a>
                     </div>
                     <div class="directors-wrap">
                         <table id="directors-table" class="table table-bordered">
