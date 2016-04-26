@@ -43,7 +43,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="director_port">Director Port:</label>
-                                <input type="text" class="form-control" name="director_port" />
+                                <input type="text" class="form-control" name="director_port" placeholder="9101" />
                             </div>
 
                             <div class="section-heading" style="margin-top: 25px;">
@@ -61,19 +61,19 @@
                             <div id="mysql-wrap">
                                 <div class="form-group">
                                     <label for="host">Host:</label>
-                                    <input type="text" class="form-control" name="host" />
+                                    <input type="text" class="form-control" name="host" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="port">Port:</label>
-                                    <input type="text" class="form-control" name="port" />
+                                    <input type="text" class="form-control" name="port" value="3306" placeholder="3306" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="database">Database:</label>
-                                    <input type="text" class="form-control" name="database" />
+                                    <input type="text" class="form-control" name="database" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" name="username" />
+                                    <input type="text" class="form-control" name="username" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password:</label>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="charset">Charset:</label>
-                                    <select id="charset-select" class="selectpicker form-control" name="charset">
+                                    <select id="charset-select" class="selectpicker form-control" name="charset" required>
                                         @if(!empty($mysql_charsets))
                                             @foreach($mysql_charsets as $charset)
                                                 @if($charset->CHARACTER_SET_NAME == 'utf8')
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="collation">Collation:</label>
-                                    <select id="collation-select" class="selectpicker form-control" name="collation">
+                                    <select id="collation-select" class="selectpicker form-control" name="collation" required>
                                         @if(!empty($mysql_collations))
                                             @foreach($mysql_collations as $collation)
                                                 @if($collation->COLLATION_NAME == 'utf8_general_ci')
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="strict">SQL Strict:</label>
-                                    <select id="strict-select" class="selectpicker form-control" name="strict">
+                                    <select id="strict-select" class="selectpicker form-control" name="strict" required >
                                         <option value="false" selected="selected">No</option>
                                         <option value="true">Yes</option>
                                     </select>
@@ -127,19 +127,19 @@
                             <div id="pgsql-wrap">
                                 <div class="form-group">
                                     <label for="host">Host:</label>
-                                    <input type="text" class="form-control" name="host" />
+                                    <input type="text" class="form-control" name="host" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="port">Port:</label>
-                                    <input type="text" class="form-control" name="port" />
+                                    <input type="text" class="form-control" name="port" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="database">Database:</label>
-                                    <input type="text" class="form-control" name="database" />
+                                    <input type="text" class="form-control" name="database" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" name="username" />
+                                    <input type="text" class="form-control" name="username" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password:</label>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="charset">Charset:</label>
-                                    <select id="charset-select" class="selectpicker form-control" name="charset">
+                                    <select id="charset-select" class="selectpicker form-control" name="charset" required>
                                         @if(!empty($pgsql_charsets))
                                             @foreach($pgsql_charsets as $charset)
                                                 @if($charset->name == 'UTF8')
@@ -173,7 +173,7 @@
                             <div id="sqlite-wrap">
                                 <div class="form-group">
                                     <label for="database">Database Path:</label>
-                                    <input type="text" class="form-control" name="database" />
+                                    <input type="text" class="form-control" name="database" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="prefix">Prefix:</label>
