@@ -84,7 +84,11 @@
                                     <select id="charset-select" class="selectpicker form-control" name="charset">
                                         @if(!empty($mysql_charsets))
                                             @foreach($mysql_charsets as $charset)
-                                                <option value="{{ $charset->CHARACTER_SET_NAME }}">{{ $charset->CHARACTER_SET_NAME }}</option>
+                                                @if($charset->CHARACTER_SET_NAME == 'utf8')
+                                                    <option value="{{ $charset->CHARACTER_SET_NAME }}" selected="selected">{{ $charset->CHARACTER_SET_NAME }}</option>
+                                                @else
+                                                    <option value="{{ $charset->CHARACTER_SET_NAME }}">{{ $charset->CHARACTER_SET_NAME }}</option>
+                                                @endif
                                             @endforeach
                                         @else
                                             <option value="-1">No Charsets Loaded</option>
@@ -96,7 +100,11 @@
                                     <select id="collation-select" class="selectpicker form-control" name="collation">
                                         @if(!empty($mysql_collations))
                                             @foreach($mysql_collations as $collation)
-                                                <option value="{{ $collation->COLLATION_NAME }}">{{ $collation->COLLATION_NAME }}</option>
+                                                @if($collation->COLLATION_NAME == 'utf8_general_ci')
+                                                    <option value="{{ $collation->COLLATION_NAME }}" selected="selected">{{ $collation->COLLATION_NAME }}</option>
+                                                @else
+                                                    <option value="{{ $collation->COLLATION_NAME }}">{{ $collation->COLLATION_NAME }}</option>
+                                                @endif
                                             @endforeach
                                         @else
                                             <option value="-1">No Collations Loaded</option>
@@ -142,7 +150,11 @@
                                     <select id="charset-select" class="selectpicker form-control" name="charset">
                                         @if(!empty($pgsql_charsets))
                                             @foreach($pgsql_charsets as $charset)
-                                                <option value="{{ $charset->name }}">{{ $charset->name }}</option>
+                                                @if($charset->name == 'UTF8')
+                                                    <option value="{{ $charset->name }}" selected="selected">{{ $charset->name }}</option>
+                                                @else
+                                                    <option value="{{ $charset->name }}">{{ $charset->name }}</option>
+                                                @endif
                                             @endforeach
                                         @else
                                             <option value="-1">No Charsets Loaded</option>
