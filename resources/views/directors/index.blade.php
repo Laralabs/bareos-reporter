@@ -47,9 +47,9 @@
                                         <td>{{ $director->director_name }}</td>
                                         <td>{{ $director->ip_address }}</td>
                                         <td>{{ $director->director_port }}</td>
-                                        <td>{{ $director->catalog_id }}</td>
+                                        <td>{{ \App\Catalogs::getCatalogName($director->catalog_id) }}</td>
                                         <td>Success</td>
-                                        <td><a href="/directors/edit/{{ $director->id }}"></a></td>
+                                        <td><a href="/directors/edit/{{ $director->id }}">Edit</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

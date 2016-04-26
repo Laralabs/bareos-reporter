@@ -15,6 +15,7 @@ class CreateCatalogsTable extends Migration
         Schema::create('catalogs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('director_id');
+            $table->string('name');
             $table->string('driver');
             $table->string('host');
             $table->string('port');

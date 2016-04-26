@@ -51,6 +51,10 @@
                                 <hr />
                             </div>
                             <div class="form-group">
+                                <label for="catalog_name">Catalog Name:</label>
+                                <input type="text" class="form-control" name="catalog_name" />
+                            </div>
+                            <div class="form-group">
                                 <label for="driver">Database Driver:</label>
                                 <select id="driver-select" class="selectpicker form-control" name="driver">
                                     <option value="mysql">MySQL</option>

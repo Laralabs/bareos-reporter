@@ -29,7 +29,7 @@ class Catalogs extends Model
      * @var array
      */
     protected $fillable = [
-        'director_id', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'engine'
+        'director_id', 'name', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'engine'
     ];
 
     public static function find($id) {
@@ -49,6 +49,16 @@ class Catalogs extends Model
         foreach($catalogs as $catalog)
         {
             return $catalog;
+        }
+    }
+
+    public static function getCatalogName($id)
+    {
+        $catalogs = Catalogs::where('id', $id)->get();
+
+        foreach($catalogs as $catalog)
+        {
+            return $catalog->name;
         }
     }
 }

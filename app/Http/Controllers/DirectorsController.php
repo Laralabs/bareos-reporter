@@ -87,6 +87,7 @@ class DirectorsController extends Controller
         $director_port      =   Input::get('director_port');
 
         // Catalog Details
+        $catalog_name       =   Input::get('catalog_name');
         $driver             =   Input::get('driver');
         $host               =   array_filter(Input::get('host'));
         $port               =   array_filter(Input::get('port'));
@@ -133,6 +134,7 @@ class DirectorsController extends Controller
                 {
                     $catalog = Catalogs::create(array(
                         'director_id'       =>  $director_id,
+                        'name'              =>  $catalog_name,
                         'driver'            =>  $driver,
                         'host'              =>  $host[0],
                         'port'              =>  $port[0],

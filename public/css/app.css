@@ -5928,8 +5928,7 @@ nav.sidebar, .main {
     display: none !important; }
   /* Directors Section */
   .add-button {
-    margin-bottom: 15px;
-    text-align: right; } }
+    margin-bottom: 15px; } }
 
 @media (min-width: 765px) {
   .main {
@@ -6031,8 +6030,7 @@ nav.sidebar, .main {
     opacity: 0; }
   /* Directors Section */
   .add-button {
-    margin-bottom: 15px;
-    text-align: right; } }
+    margin-bottom: 15px; } }
 
 @media (min-width: 1330px) {
   .main {
