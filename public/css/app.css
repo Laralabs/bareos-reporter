@@ -5857,6 +5857,10 @@ hr {
 .form-add-director div[class*="col-"] {
   padding: 0 !important; }
 
+.label {
+  font-size: 100% !important;
+  letter-spacing: 1px; }
+
 /* Globals End */
 body, html {
   height: 100%; }

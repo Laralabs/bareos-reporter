@@ -70,8 +70,13 @@ class DirectorsController extends Controller
     public function edit($id)
     {
         $director = Directors::find($id);
+        $catalog = Catalogs::getDirectorCatalog($id);
 
-        return view('directors.edit', ['director' => $director]);
+        $mysql_collations = MysqlCollations::all()->sortByDesc('SORTLEN');
+        $mysql_charsets = MysqlCollations::all()->sortByDesc('SORTLEN')->unique('CHARACTER_SET_NAME');
+        $pgsql_charsets = PgsqlCharsets::all();
+
+        return view('directors.edit', ['director' => $director, 'catalog' => $catalog, 'mysql_collations' => $mysql_collations, 'mysql_charsets' => $mysql_charsets, 'pgsql_charsets' => $pgsql_charsets]);
     }
 
     /**
