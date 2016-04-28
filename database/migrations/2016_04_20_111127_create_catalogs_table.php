@@ -26,6 +26,7 @@ class CreateCatalogsTable extends Migration
             $table->string('collation');
             $table->string('prefix');
             $table->boolean('strict')->default(false);
+            $table->string('schema');
             $table->string('engine')->nullable();
             $table->timestamps();
         });

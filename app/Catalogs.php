@@ -29,7 +29,7 @@ class Catalogs extends Model
      * @var array
      */
     protected $fillable = [
-        'director_id', 'name', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'engine'
+        'director_id', 'name', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'schema', 'engine'
     ];
 
     public static function find($id) {
