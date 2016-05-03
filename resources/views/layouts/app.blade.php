@@ -75,13 +75,13 @@
     <div class="container content-container">
         <div class="row director-select-row">
         <div class="col-md-12">
-            <form class="form-add-director" method="POST" action="/change/director">
+            <form id="director-select-form" method="POST" action="/change/director">
                 {!! csrf_field() !!}
                 <div class="director-select-label-wrap">
                     <span class="director-select-label">ACTIVE DIRECTOR:</span>
                 </div>
                 <div class="director-select-wrap">
-                    <select id="director-select" class="selectpicker form-control inline-select" name="director-select" onchange="this.form.submit()">
+                    <select id="director-select" class="selectpicker form-control inline-select director-select" name="director-select">
                         @if(!empty($directors))
                             @foreach($directors as $director)
                                 <option value="{{ $director->id }}">{{ $director->director_name }}</option>

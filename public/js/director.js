@@ -106,4 +106,12 @@
             })
         }
     });
+
+    /**
+     * When the active director select dropdown changes
+     * submit the form value.
+     */
+    $('#director-select').on('changed.bs.select', function(e) {
+        $('#director-select-form').submit();
+    })
 })(jQuery);

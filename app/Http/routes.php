@@ -36,6 +36,9 @@ Route::group(['middleware' => 'web'], function () {
     });
     $this->get('dashboard', 'DashboardController@index');
 
+    //Director Select Route
+    $this->post('change/director', 'DashboardController@changeDirector');
+
     //Directors Routes
     $this->get('directors', 'DirectorsController@index');
     $this->get('directors/add', 'DirectorsController@add');
