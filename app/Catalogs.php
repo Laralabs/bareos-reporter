@@ -29,7 +29,7 @@ class Catalogs extends Model
      * @var array
      */
     protected $fillable = [
-        'director_id', 'name', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'schema', 'engine'
+        'director_id', 'name', 'driver', 'host', 'port', 'database', 'username', 'password', 'charset', 'collation', 'prefix', 'strict', 'schema', 'engine', 'status'
     ];
 
     public static function find($id) {
@@ -59,6 +59,25 @@ class Catalogs extends Model
         foreach($catalogs as $catalog)
         {
             return $catalog->name;
+        }
+    }
+
+    public static function getCatalogConnectionStatus($director_id)
+    {
+        $catalogs = Catalogs::where('director_id', $director_id)->get();
+
+        foreach($catalogs as $catalog)
+        {
+            $status = $catalog->status;
+
+            if($status == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

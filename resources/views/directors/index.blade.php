@@ -48,7 +48,13 @@
                                         <td>{{ $director->ip_address }}</td>
                                         <td>{{ $director->director_port }}</td>
                                         <td>{{ \App\Catalogs::getCatalogName($director->catalog_id) }}</td>
-                                        <td><span class="label label-success">Success</span></td>
+                                        <td>
+                                            @if(\App\Catalogs::getCatalogConnectionStatus($director->id) === true)
+                                                <span class="label label-success">Success</span>
+                                            @else
+                                                <span class="label label-danger">Failed</span>
+                                            @endif
+                                        </td>
                                         <td><a href="/directors/edit/{{ $director->id }}">Edit</a></td>
                                     </tr>
                                 @endforeach
