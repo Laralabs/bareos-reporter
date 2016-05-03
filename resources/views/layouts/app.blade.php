@@ -32,6 +32,10 @@
             margin-right: 6px;
         }
     </style>
+
+    <?php
+        $directors = \App\Directors::all();
+    ?>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default sidebar" role="navigation">
@@ -56,9 +60,9 @@
                     <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard<i class="fa fa-tachometer small-nav"></i></a></li>
                     <li><a href="{{ url('/directors') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates<i class="fa fa-file small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts<i class="fa fa-users small-nav"></i></a></li>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings<i class="fa fa-cog small-nav"></i></a></li>
                 </ul>
             </div>
@@ -68,7 +72,32 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="container content-container">
+        <div class="row director-select-row">
+        <div class="col-md-12">
+            <form class="form-add-director" method="POST" action="/change/director">
+                {!! csrf_field() !!}
+                <div class="director-select-label-wrap">
+                    <span class="director-select-label">ACTIVE DIRECTOR:</span>
+                </div>
+                <div class="director-select-wrap">
+                    <select id="director-select" class="selectpicker form-control inline-select" name="director-select" onchange="this.form.submit()">
+                        @if(!empty($directors))
+                            @foreach($directors as $director)
+                                <option value="{{ $director->id }}">{{ $director->director_name }}</option>
+                            @endforeach
+                        @else
+                            <option value="-1" disabled>No Directors</option>
+                        @endif
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+        </div>
+
+        @yield('content')
+    </div>
 
     <!-- JavaScripts -->
     <script type="text/javascript" src="/js/jquery.js"></script>

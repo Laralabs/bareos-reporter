@@ -188,6 +188,37 @@ hr {
   letter-spacing: 1px;
 }
 
+.clearfix {
+  clear: both;
+}
+
+.inline-select {
+  width: auto !important;
+  margin-left: 5px !important;
+}
+
+.director-select-row {
+  margin-bottom: 17px !important;
+
+  .director-select-label-wrap {
+    float: left;
+    padding: 6px 5px 4px 0;
+    display: inline-block;
+
+    .director-select-label {
+      font-family: "karlabold" !important;
+      font-size: 18px;
+      font-weight: normal !important;
+      color: #555555 !important;
+    }
+  }
+
+  .director-select-wrap {
+    float: left;
+    display: inline-block;
+  }
+}
+
 /* Globals End */
 
 //SIDEBAR
@@ -464,11 +495,13 @@ nav.sidebar, .main{
 
   .content-container {
     padding-left: 53px;
-    padding-top: 27px;
+    padding-top: 15px;
     width: 100% !important;
 
     .row {
-      margin: 0 !important;
+      float: left;
+      width: 100%;
+      margin: 0 0 15px 0 !important;
     }
 
     .col-md-12 {
@@ -539,11 +572,13 @@ nav.sidebar, .main{
 
   .content-container {
     padding-left: 200px;
-    padding-top: 27px;
+    padding-top: 15px;
     width: 100% !important;
 
     .row {
-      margin: 0 !important;
+      float: left;
+      width: 100%;
+      margin: 0 0 15px 0 !important;
     }
   }
 }
