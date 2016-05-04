@@ -28,6 +28,7 @@ class CreateCatalogsTable extends Migration
             $table->boolean('strict')->default(false);
             $table->string('schema');
             $table->string('engine')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
