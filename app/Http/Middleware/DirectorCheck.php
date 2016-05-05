@@ -41,12 +41,12 @@ class DirectorCheck
             }
             else
             {
-                return Redirect::back()->with('failed', 'Director catalog unreachable');
+                return Redirect::back()->with('error', 'Director catalog unreachable');
             }
         }
         else
         {
-            return Redirect::back()->with('failed', 'Please select a valid Director');
+            return Redirect::back()->with('error', 'Please select a valid Director');
         }
     }
 }

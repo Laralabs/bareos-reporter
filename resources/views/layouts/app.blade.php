@@ -28,6 +28,11 @@
     <link rel="stylesheet" type="text/css" href="/css/dataTables.css" >
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css" >
 
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/dataTables.js"></script>
+
     <style>
         .fa-btn {
             margin-right: 6px;
@@ -61,7 +66,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard<i class="fa fa-tachometer small-nav"></i></a></li>
                     <li><a href="{{ url('/directors') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
+                    <li><a href="{{ url('/clients') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates<i class="fa fa-file small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts<i class="fa fa-users small-nav"></i></a></li>
@@ -106,14 +111,67 @@
             </form>
         </div>
         </div>
-
+        <?php
+        $error = \Illuminate\Support\Facades\Session::get('error');
+        $success = \Illuminate\Support\Facades\Session::get('success');
+        $warning = \Illuminate\Support\Facades\Session::get('warning');
+        ?>
+        @if(isset($error) || isset($success) || isset($warning))
+            @if(isset($error))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.error").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container error"  style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <strong><i class="fa fa-times"></i></strong> {{ $error }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('error'); ?>
+            @endif
+            @if(isset($success))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.success").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container success" style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <strong><i class="fa fa-check-circle"></i></strong> {{ $success }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('success'); ?>
+            @endif
+            @if(isset($warning))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container warning" style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            <strong><i class="fa fa-exclamation-triangle"></i></strong> {{ $warning }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('warning'); ?>
+            @endif
+        @endif
         @yield('content')
     </div>
 
-    <!-- JavaScripts -->
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/js/dataTables.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select.js"></script>
     <script type="text/javascript" src="/js/director.js"></script>
 </body>

@@ -11,40 +11,40 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
 
     // Authentication Routes...
-    $this->get('login', 'Auth\AuthController@showLoginForm');
-    $this->post('login', 'Auth\AuthController@login');
-    $this->get('logout', 'Auth\AuthController@logout');
+    Route::get('login', 'Auth\AuthController@showLoginForm');
+    Route::post('login', 'Auth\AuthController@login');
+    Route::get('logout', 'Auth\AuthController@logout');
 
     // Registration Routes...
-    $this->get('register', 'Auth\AuthController@showRegistrationForm');
-    $this->post('register', 'Auth\AuthController@register');
+    Route::get('register', 'Auth\AuthController@showRegistrationForm');
+    Route::post('register', 'Auth\AuthController@register');
 
     // Password Reset Routes...
-    $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-    $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-    $this->post('password/reset', 'Auth\PasswordController@reset');
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset');
 
 
-    $this->get('/', 'IndexController@index');
+    Route::get('/', 'IndexController@index');
 
     //Dashboard Route
-    $this->get('home', function() {
+    Route::get('home', function() {
         return redirect('dashboard');
     });
-    $this->get('dashboard', 'DashboardController@index');
+    Route::get('dashboard', 'DashboardController@index');
 
     //Director Select Route
-    $this->post('change/director', 'DashboardController@changeDirector');
+    Route::post('change/director', 'DashboardController@changeDirector');
 
     //Directors Routes
-    $this->get('directors', 'DirectorsController@index');
-    $this->get('directors/add', 'DirectorsController@add');
-    $this->get('directors/edit/{id}', 'DirectorsController@edit');
-    $this->post('directors/create', 'DirectorsController@create');
-    $this->post('directors/save/{id}', 'DirectorsController@save');
+    Route::get('directors', 'DirectorsController@index');
+    Route::get('directors/add', 'DirectorsController@add');
+    Route::get('directors/edit/{id}', 'DirectorsController@edit');
+    Route::post('directors/create', 'DirectorsController@create');
+    Route::post('directors/save/{id}', 'DirectorsController@save');
 
-});
+    //Clients Routes
+    Route::get('clients', 'ClientsController@index');
  

@@ -26,6 +26,10 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css" >
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" >
 
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+
     <style>
         .fa-btn {
             margin-right: 6px;
@@ -43,12 +47,66 @@
         <div class="heading text-center">
             <h2>Reporter</h2>
         </div>
+        <?php
+        $error = \Illuminate\Support\Facades\Session::get('error');
+        $success = \Illuminate\Support\Facades\Session::get('success');
+        $warning = \Illuminate\Support\Facades\Session::get('warning');
+        ?>
+        @if(isset($error) || isset($success) || isset($warning))
+            @if(isset($error))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.error").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container error"  style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <strong><i class="fa fa-times"></i></strong> {{ $error }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('error'); ?>
+            @endif
+            @if(isset($success))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.success").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container success" style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <strong><i class="fa fa-check-circle"></i></strong> {{ $success }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('success'); ?>
+            @endif
+            @if(isset($warning))
+                <script type="text/javascript">
+                    (function($) {
+                        $(document).ready(function () {
+                            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+                        });
+                    })(jQuery);
+                </script>
+                <div class="row message-container warning" style="display: none; padding-bottom: 0 !important;">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            <strong><i class="fa fa-exclamation-triangle"></i></strong> {{ $warning }}
+                        </div>
+                    </div>
+                </div>
+                <?php \Illuminate\Support\Facades\Session::forget('warning'); ?>
+            @endif
+        @endif
     </div>
 
     @yield('content')
-
-    <!-- JavaScripts -->
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
 </body>
 </html>

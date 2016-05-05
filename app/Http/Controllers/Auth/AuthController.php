@@ -101,7 +101,7 @@ class AuthController extends Controller
     {
         if(Auth::attempt(['username' => Input::get('username'), 'password' => Input::get('password')]))
         {
-            return redirect('/dashboard')->with('success', 'Login successful!');
+            return redirect('dashboard')->with('success', 'Login successful!');
         }
         else
         {

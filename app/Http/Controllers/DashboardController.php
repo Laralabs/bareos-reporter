@@ -63,7 +63,7 @@ class DashboardController extends Controller
         }
         else
         {
-            return redirect('directors')->with('failed', 'Unable to change director');
+            return redirect('directors')->with('error', 'Unable to change director');
         }
     }
 }
