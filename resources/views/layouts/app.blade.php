@@ -35,6 +35,7 @@
 
     <?php
         $directors = \App\Directors::all();
+        $active_director = \Illuminate\Support\Facades\Session::get('active_director');
     ?>
 </head>
 <body id="app-layout">
@@ -84,7 +85,15 @@
                     <select id="director-select" class="selectpicker form-control inline-select director-select" name="director-select">
                         @if(!empty($directors))
                             @foreach($directors as $director)
-                                <option value="{{ $director->id }}">{{ $director->director_name }}</option>
+                                @if(!empty($active_director))
+                                    @if($active_director == $director->id)
+                                        <option value="{{ $director->id }}" selected="selected">{{ $director->director_name }}</option>
+                                    @else
+                                        <option value="{{ $director->id }}">{{ $director->director_name }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $director->id }}">{{ $director->director_name }}</option>
+                                @endif
                             @endforeach
                         @else
                             <option value="-1" disabled>No Directors</option>

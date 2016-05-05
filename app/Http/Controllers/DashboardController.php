@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -31,7 +32,8 @@ class DashboardController extends Controller
     }
 
     /**
-     * Change the active director catalog
+     * Change the active director, set active_director
+     * session variable if input value not empty.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,8 +41,15 @@ class DashboardController extends Controller
     {
         $director_id = Input::get('director-select');
 
-        $catalog = Catalogs::getDirectorCatalog($director_id);
+        if(!empty($director_id))
+        {
+            Session::set('active_director', $director_id);
 
-        return redirect('dashboard')->with('success', 'Director changed successfully');
+            return redirect('directors')->with('success', 'Director changed successfully');
+        }
+        else
+        {
+            return redirect('directors')->with('failed', 'Unable to change director');
+        }
     }
 }
