@@ -53,6 +53,6 @@ Route::get('contacts', 'ContactsController@index');
 Route::get('contacts/add', 'ContactsController@add');
 Route::get('contacts/edit/{id}', 'ContactsController@edit');
 Route::post('contacts/create', 'ContactsController@create');
-Route::post('contacts/save/{id}', 'ContactsController@create');
+Route::post('contacts/save/{id}', 'ContactsController@save');
 
  
