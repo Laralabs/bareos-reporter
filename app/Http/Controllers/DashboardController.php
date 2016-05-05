@@ -54,6 +54,9 @@ class DashboardController extends Controller
 
         if(!empty($director_id))
         {
+            $connectionName = Catalogs::getCatalogName($director_id);
+
+            Session::set('active_connection', $connectionName);
             Session::set('active_director', $director_id);
 
             return redirect('directors')->with('success', 'Director changed successfully');
