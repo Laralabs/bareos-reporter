@@ -5883,6 +5883,22 @@ hr {
     float: left;
     display: inline-block; }
 
+.dt-bootstrap .row .col-sm-5 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.dt-bootstrap .row .col-sm-6 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.dt-bootstrap .row .col-sm-7 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.dt-bootstrap .row .col-sm-12 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
 /* Globals End */
 body, html {
   height: 100%; }
