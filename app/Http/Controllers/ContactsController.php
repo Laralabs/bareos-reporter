@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Mockery\Exception;
 
 class ContactsController extends Controller
 {
@@ -79,6 +80,51 @@ class ContactsController extends Controller
         else
         {
             return redirect('contacts')->with('error', 'Make sure name and email are valid');
+        }
+    }
+
+    /**
+     * Edit Contact View
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function edit($id)
+    {
+        $contact = Contacts::find($id);
+
+        return view('contacts.edit', ['contact' => $contact]);
+    }
+
+    public function save($id)
+    {
+        $contact = Contacts::find($id);
+
+        $name = Input::get('contact_name');
+        $email = Input::get('contact_email');
+        $mobile = Input::get('contact_mobile');
+
+        try {
+            if(isset($name))
+            {
+                $contact->name = $name;
+            }
+            if(isset($email) && $email != $contact->email)
+            {
+                $contact->email = $email;
+            }
+            if(isset($mobile))
+            {
+                $contact->mobile = $mobile;
+            }
+
+            $contact->save();
+
+            return redirect('contacts')->with('success', 'Contact saved successfully');
+
+        }catch(Exception $e)
+        {
+            return redirect('contacts')->with('error', 'Failed to save contact');
         }
     }
 }
