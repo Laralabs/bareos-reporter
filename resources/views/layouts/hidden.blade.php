@@ -4,11 +4,12 @@
  * Bareos Reporter
  * Application for managing Bareos Backup Email Reports
  *
- * Directors Controller
+ * Hidden Application Layout
  *
  * @license The MIT License (MIT) See: LICENSE file
  * @copyright Copyright (c) 2016 Matt Clinton
  * @author Matt Clinton <matt@laralabs.uk>
+ * @website http://www.magelabs.uk/
  */
 ?>
 <html lang="en">
