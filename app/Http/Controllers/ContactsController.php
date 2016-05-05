@@ -17,6 +17,7 @@ use App\Contacts;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class ContactsController extends Controller
 {
@@ -31,7 +32,7 @@ class ContactsController extends Controller
     }
 
     /**
-     * Show contacts
+     * Show Contacts
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,5 +41,44 @@ class ContactsController extends Controller
         $contacts = Contacts::all();
 
         return view('contacts.index', ['contacts' => $contacts]);
+    }
+
+    /**
+     * Add Contact View
+     *
+     * @return mixed
+     */
+    public function add()
+    {
+        return view('contacts.add');
+    }
+
+    /**
+     * Create Contact
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        $name = Input::get('contact_name');
+        $email = Input::get('contact_email');
+        $mobile = Input::get('contact_mobile');
+
+        if(!empty($name) && !empty($email))
+        {
+            $contact = Contacts::create(array(
+                'name'      =>  $name,
+                'email'     =>  $email,
+                'mobile'    =>  $mobile
+            ));
+
+            $contact->save();
+
+            return redirect('contacts')->with('success', 'Contact created successfully');
+        }
+        else
+        {
+            return redirect('contacts')->with('error', 'Make sure name and email are valid');
+        }
     }
 }

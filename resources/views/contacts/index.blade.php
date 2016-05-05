@@ -37,6 +37,7 @@
                                     <th>Name</th>
                                     <th>Email Address</th>
                                     <th>Mobile Number</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,7 @@
                                         <td>{{ $contact->name }}</td>
                                         <td>{{ $contact->email }}</td>
                                         <td>{{ $contact->mobile }}</td>
+                                        <td><a href="/contacts/edit/{{ $contact->id }}">Edit</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
