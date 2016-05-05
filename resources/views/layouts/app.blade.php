@@ -84,6 +84,7 @@
                 <div class="director-select-wrap">
                     <select id="director-select" class="selectpicker form-control inline-select director-select" name="director-select">
                         @if(!empty($directors))
+                            <option value="-1">Please select..</option>
                             @foreach($directors as $director)
                                 @if(!empty($active_director))
                                     @if($active_director == $director->id)
