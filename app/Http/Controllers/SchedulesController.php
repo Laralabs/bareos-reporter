@@ -163,4 +163,31 @@ class SchedulesController extends Controller
             return redirect('schedules')->with('error', 'Please make sure name and frequency are valid');
         }
     }
+
+    /**
+     * Delete schedule
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        $schedule = Schedules::find($id);
+
+        try {
+            if($schedule != null)
+            {
+                $schedule->delete();
+
+                return redirect('schedules')->with('success', 'Schedule deleted successfully');
+            }
+            else
+            {
+                return redirect('schedules')->with('success', 'Schedule deleted successfully');
+            }
+        }catch(Exception $e)
+        {
+            return redirect('schedules')->with('error', 'Unable to delete schedule');
+        }
+    }
 }

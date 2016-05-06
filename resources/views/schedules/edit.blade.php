@@ -28,9 +28,9 @@
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-edit-schedule" method="POST" action="/schedules/save/{{ $schedule->id }}">
-                        {!! csrf_field() !!}
-                        <div class="col-xs-6 col-md-4 col-lg-4">
+                    <div class="col-xs-6 col-md-4 col-lg-4">
+                        <form class="form-edit-schedule" method="POST" action="/schedules/save/{{ $schedule->id }}">
+                            {!! csrf_field() !!}
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" name="name" value="{{ $schedule->name }}"/>
@@ -76,11 +76,52 @@
                                 <label for="time">Time:</label>
                                 <input type="text" class="form-control" name="time" placeholder="00:00" value="{{ $schedule->time }}" />
                             </div>
-                            <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                            <div class="form-group" style="margin-top: 15px;">
+                                <button class="btn btn-danger" data-record-id="{{ $schedule->id }}" data-record-title="{{ $schedule->name }}" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+                            </div>
+                            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="scheduleDelete" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>You are about to delete <b>{{ $schedule->name }}</b>, this procedure is irreversible.</p>
+                                            <p>Do you want to proceed?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger btn-ok">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <script>
+                            (function($){
+                                $(document).ready(function(){
+                                    $('#confirm-delete').on('click', '.btn-ok', function(e) {
+                                        var $modalDiv = $(e.delegateTarget);
+                                        var id = $(this).data('recordId');
+                                        window.location.replace('/schedules/delete/' + id);
+                                        $modalDiv.addClass('loading');
+                                        setTimeout(function() {
+                                            $modalDiv.modal('hide').removeClass('loading');
+                                        }, 1000)
+                                    });
+                                    $('#confirm-delete').on('show.bs.modal', function(e) {
+                                        var data = $(e.relatedTarget).data();
+                                        $('.title', this).text(data.recordTitle);
+                                        $('.btn-ok', this).data('recordId', data.recordId);
+                                    });
+                                });
+                            })(jQuery);
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

@@ -61,5 +61,6 @@ Route::get('schedules/add', 'SchedulesController@add');
 Route::get('schedules/edit/{id}', 'SchedulesController@edit');
 Route::post('schedules/create', 'SchedulesController@create');
 Route::post('schedules/save/{id}', 'SchedulesController@save');
+Route::get('schedules/delete/{id}', 'SchedulesController@delete');
 
  
