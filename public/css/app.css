@@ -5899,6 +5899,26 @@ hr {
   padding-left: 0 !important;
   padding-right: 0 !important; }
 
+.panel-body .col-sm-5 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.panel-body .col-sm-6 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.panel-body .col-sm-7 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.panel-body .col-sm-12 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.panel-body .col-xs-4 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
 /* Globals End */
 body, html {
   height: 100%; }

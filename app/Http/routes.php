@@ -55,4 +55,11 @@ Route::get('contacts/edit/{id}', 'ContactsController@edit');
 Route::post('contacts/create', 'ContactsController@create');
 Route::post('contacts/save/{id}', 'ContactsController@save');
 
+//Schedules Routes
+Route::get('schedules', 'SchedulesController@index');
+Route::get('schedules/add', 'SchedulesController@add');
+Route::get('schedules/edit/{id}', 'SchedulesController@edit');
+Route::post('schedules/create', 'SchedulesController@create');
+Route::post('schedules/save/{id}', 'SchedulesController@save');
+
  
