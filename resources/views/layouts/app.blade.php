@@ -9,7 +9,7 @@
  * @license The MIT License (MIT) See: LICENSE file
  * @copyright Copyright (c) 2016 Matt Clinton
  * @author Matt Clinton <matt@laralabs.uk>
- * @website http://www.magelabs.uk/
+ * @website http://www.laralabs.uk/
  */
 ?>
 <html lang="en">
@@ -67,10 +67,16 @@
                     <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard<i class="fa fa-tachometer small-nav"></i></a></li>
                     <li><a href="{{ url('/directors') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
                     <li><a href="{{ url('/clients') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
+                    <li><a href="{{ url('/schedules') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
                     <li><a href="{{ url('/') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates<i class="fa fa-file small-nav"></i></a></li>
                     <li><a href="{{ url('/contacts') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts<i class="fa fa-users small-nav"></i></a></li>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings<i class="fa fa-cog small-nav"></i></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog" style="margin-right: 5px;"></i>Settings<i class="fa fa-cog small-nav"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a href="{{ url('/settings/users') }}">Users</a></li>
+                            <li><a href="{{ url('/settings/email') }}">Email Settings</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
