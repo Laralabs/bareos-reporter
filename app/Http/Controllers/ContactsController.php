@@ -96,6 +96,12 @@ class ContactsController extends Controller
         return view('contacts.edit', ['contact' => $contact]);
     }
 
+    /**
+     * Save Contact
+     *
+     * @param $id
+     * @return mixed
+     */
     public function save($id)
     {
         $contact = Contacts::find($id);
@@ -125,6 +131,33 @@ class ContactsController extends Controller
         }catch(Exception $e)
         {
             return redirect('contacts')->with('error', 'Failed to save contact');
+        }
+    }
+
+    /**
+     * Delete Contact
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        $contact = Contacts::find($id);
+
+        try {
+            if($contact != null)
+            {
+                $contact->delete();
+
+                return redirect('contacts')->with('success', 'Contact deleted successfully');
+            }
+            else
+            {
+                return redirect('contacts')->with('success', 'Contact deleted successfully');
+            }
+        }catch(Exception $e)
+        {
+            return redirect('contacts')->with('error', 'Unable to delete contact');
         }
     }
 }

@@ -81,9 +81,9 @@
                             </div>
                         </form>
                             <div class="form-group" style="margin-top: 15px;">
-                                <button class="btn btn-danger" data-record-id="{{ $schedule->id }}" data-record-title="{{ $schedule->name }}" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+                                <button class="btn btn-danger" data-record-id="{{ $schedule->id }}" data-record-title="{{ $schedule->name }}" data-toggle="modal" data-target="#confirm-schedule-delete">Delete</button>
                             </div>
-                            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="scheduleDelete" aria-hidden="true">
+                            <div class="modal fade" id="confirm-schedule-delete" tabindex="-1" role="dialog" aria-labelledby="scheduleDelete" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -104,16 +104,12 @@
                         <script>
                             (function($){
                                 $(document).ready(function(){
-                                    $('#confirm-delete').on('click', '.btn-ok', function(e) {
+                                    $('#confirm-schedule-delete').on('click', '.btn-ok', function(e) {
                                         var $modalDiv = $(e.delegateTarget);
                                         var id = $(this).data('recordId');
-                                        window.location.replace('/schedules/delete/' + id);
-                                        $modalDiv.addClass('loading');
-                                        setTimeout(function() {
-                                            $modalDiv.modal('hide').removeClass('loading');
-                                        }, 1000)
+                                        $(location).attr('href', '/schedules/delete/' + id);
                                     });
-                                    $('#confirm-delete').on('show.bs.modal', function(e) {
+                                    $('#confirm-schedule-delete').on('show.bs.modal', function(e) {
                                         var data = $(e.relatedTarget).data();
                                         $('.title', this).text(data.recordTitle);
                                         $('.btn-ok', this).data('recordId', data.recordId);

@@ -44,6 +44,7 @@ Route::get('directors/add', 'DirectorsController@add');
 Route::get('directors/edit/{id}', 'DirectorsController@edit');
 Route::post('directors/create', 'DirectorsController@create');
 Route::post('directors/save/{id}', 'DirectorsController@save');
+Route::get('directors/delete/{id}', 'DirectorsController@delete');
 
 //Clients Routes
 Route::get('clients', 'ClientsController@index');
@@ -54,6 +55,7 @@ Route::get('contacts/add', 'ContactsController@add');
 Route::get('contacts/edit/{id}', 'ContactsController@edit');
 Route::post('contacts/create', 'ContactsController@create');
 Route::post('contacts/save/{id}', 'ContactsController@save');
+Route::get('contacts/delete/{id}', 'ContactsController@delete');
 
 //Schedules Routes
 Route::get('schedules', 'SchedulesController@index');

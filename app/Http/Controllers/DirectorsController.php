@@ -426,4 +426,44 @@ class DirectorsController extends Controller
             return Redirect::back()->with('error', 'Invalid driver selected');
         }
     }
+
+    /**
+     * Delete Director
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        $director = Directors::find($id);
+        $catalog = Catalogs::getDirectorCatalog($id);
+
+        $active_director = Session::get('active_director');
+        if($active_director == $id)
+        {
+            Session::forget('active_director');
+            Session::forget('active_connection');
+        }
+
+        try {
+            if($director != null)
+            {
+                $director->delete();
+
+                if($catalog != null)
+                {
+                    $catalog->delete();
+                }
+
+                return redirect('directors')->with('success', 'Director deleted successfully');
+            }
+            else
+            {
+                return redirect('directors')->with('success', 'Director deleted successfully');
+            }
+        }catch(Exception $e)
+        {
+            return redirect('directors')->with('error', 'Unable to delete director');
+        }
+    }
 }

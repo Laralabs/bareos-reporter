@@ -32,10 +32,10 @@
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-add-director" method="POST" action="/directors/save/{{ $director->id }}">
-                        {!! csrf_field() !!}
-                        <input type="hidden" id="driver_check" name="driver_check" value="{{ $catalog->driver }}" />
-                        <div class="col-xs-4">
+                    <div class="col-xs-4">
+                        <form class="form-add-director" method="POST" action="/directors/save/{{ $director->id }}">
+                            {!! csrf_field() !!}
+                            <input type="hidden" id="driver_check" name="driver_check" value="{{ $catalog->driver }}" />
                             <div class="section-heading">
                                 <h4>Bareos Director Details</h4>
                                 <hr />
@@ -69,16 +69,16 @@
                                     @else
                                         <option value="mysql">MySQL</option>
                                     @endif
-                                        @if($catalog->driver == 'pgsql')
-                                            <option value="pgsql" selected="selected">PostgreSQL</option>
-                                        @else
-                                            <option value="pgsql">PostgreSQL</option>
-                                        @endif
-                                        @if($catalog->driver == 'sqlite')
-                                            <option value="sqlite" selected="selected">SQLite</option>
-                                        @else
-                                            <option value="sqlite">SQLite</option>
-                                        @endif
+                                    @if($catalog->driver == 'pgsql')
+                                        <option value="pgsql" selected="selected">PostgreSQL</option>
+                                    @else
+                                        <option value="pgsql">PostgreSQL</option>
+                                    @endif
+                                    @if($catalog->driver == 'sqlite')
+                                        <option value="sqlite" selected="selected">SQLite</option>
+                                    @else
+                                        <option value="sqlite">SQLite</option>
+                                    @endif
                                 </select>
                             </div>
                             <div id="mysql-wrap">
@@ -172,7 +172,7 @@
                                         @else
                                             <option value="0" selected="selected">No</option>
                                         @endif
-                                            <option value="1">Yes</option>
+                                        <option value="1">Yes</option>
                                     </select>
                                 </div>
                                 <input type="hidden" class="form-control" name="engine" value="null" />
@@ -270,11 +270,48 @@
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary btn-lg" style="margin-right: 10px;">Save</button>
-                                <button type="submit" class="btn btn-info btn-lg" disabled><i class="fa fa-btn fa-sign-in"></i>Test Connection</button>
+                                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Save</button>
+                                <button type="submit" class="btn btn-info" disabled><i class="fa fa-btn fa-sign-in"></i>Test Connection</button>
+                            </div>
+                        </form>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <button class="btn btn-danger" data-record-id="{{ $director->id }}" data-record-title="{{ $director->director_name }}" data-toggle="modal" data-target="#confirm-director-delete">Delete</button>
+                        </div>
+                        <div class="modal fade" id="confirm-director-delete" tabindex="-1" role="dialog" aria-labelledby="directorDelete" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="directorDelete">Confirm Delete</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>You are about to delete <b>{{ $director->director_name }}</b>, this procedure is irreversible.</p>
+                                        <p>Do you want to proceed?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger btn-ok">Delete</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                        <script>
+                            (function($){
+                                $(document).ready(function(){
+                                    $('#confirm-director-delete').on('click', '.btn-ok', function(e) {
+                                        var $modalDiv = $(e.delegateTarget);
+                                        var id = $(this).data('recordId');
+                                        $(location).attr('href', '/directors/delete/' + id);
+                                    });
+                                    $('#confirm-director-delete').on('show.bs.modal', function(e) {
+                                        var data = $(e.relatedTarget).data();
+                                        $('.title', this).text(data.recordTitle);
+                                        $('.btn-ok', this).data('recordId', data.recordId);
+                                    });
+                                });
+                            })(jQuery);
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
