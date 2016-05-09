@@ -49,14 +49,6 @@ Route::get('directors/delete/{id}', 'DirectorsController@delete');
 //Clients Routes
 Route::get('clients', 'ClientsController@index');
 
-//Contacts Routes
-Route::get('contacts', 'ContactsController@index');
-Route::get('contacts/add', 'ContactsController@add');
-Route::get('contacts/edit/{id}', 'ContactsController@edit');
-Route::post('contacts/create', 'ContactsController@create');
-Route::post('contacts/save/{id}', 'ContactsController@save');
-Route::get('contacts/delete/{id}', 'ContactsController@delete');
-
 //Schedules Routes
 Route::get('schedules', 'SchedulesController@index');
 Route::get('schedules/add', 'SchedulesController@add');
@@ -64,5 +56,21 @@ Route::get('schedules/edit/{id}', 'SchedulesController@edit');
 Route::post('schedules/create', 'SchedulesController@create');
 Route::post('schedules/save/{id}', 'SchedulesController@save');
 Route::get('schedules/delete/{id}', 'SchedulesController@delete');
+
+//Templates Routes
+Route::get('templates', 'TemplatesController@index');
+Route::get('templates/add', 'TemplatesController@add');
+Route::get('templates/edit/{id}', 'TemplatesController@edit');
+Route::post('templates/create', 'TemplatesController@create');
+Route::post('templates/save/{id}', 'TemplatesController@save');
+Route::get('templates/delete/{id}', 'TemplatesController@delete');
+
+//Contacts Routes
+Route::get('contacts', 'ContactsController@index');
+Route::get('contacts/add', 'ContactsController@add');
+Route::get('contacts/edit/{id}', 'ContactsController@edit');
+Route::post('contacts/create', 'ContactsController@create');
+Route::post('contacts/save/{id}', 'ContactsController@save');
+Route::get('contacts/delete/{id}', 'ContactsController@delete');
 
  

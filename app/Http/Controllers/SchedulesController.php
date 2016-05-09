@@ -183,7 +183,7 @@ class SchedulesController extends Controller
             }
             else
             {
-                return redirect('schedules')->with('success', 'Schedule deleted successfully');
+                return redirect('schedules')->with('error', 'Unable to load schedule');
             }
         }catch(Exception $e)
         {
