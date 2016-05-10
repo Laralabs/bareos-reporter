@@ -67,6 +67,9 @@
                     <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer" style="margin-right: 5px;"></i>Dashboard<i class="fa fa-tachometer small-nav"></i></a></li>
                     <li><a href="{{ url('/directors') }}"><i class="fa fa-server" style="margin-right: 5px;"></i>Directors<i class="fa fa-server small-nav"></i></a></li>
                     <li><a href="{{ url('/clients') }}"><i class="fa fa-desktop" style="margin-right: 5px;"></i>Clients<i class="fa fa-desktop small-nav"></i></a></li>
+                    @if(!empty($active_director) && $active_director != -1)
+                        <li><a href="{{ url('/jobs/'.$active_director) }}"><i class="fa fa-line-chart" style="margin-right: 5px;"></i>Jobs<i class="fa fa-line-chart small-nav"></i></a></li>
+                    @endif
                     <li><a href="{{ url('/schedules') }}"><i class="fa fa-clock-o" style="margin-right: 5px;"></i>Schedules<i class="fa fa-clock-o small-nav"></i></a></li>
                     <li><a href="{{ url('/templates') }}"><i class="fa fa-file" style="margin-right: 5px;"></i>Templates<i class="fa fa-file small-nav"></i></a></li>
                     <li><a href="{{ url('/contacts') }}"><i class="fa fa-users" style="margin-right: 5px;"></i>Contacts<i class="fa fa-users small-nav"></i></a></li>

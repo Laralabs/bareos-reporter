@@ -73,4 +73,9 @@ Route::post('contacts/create', 'ContactsController@create');
 Route::post('contacts/save/{id}', 'ContactsController@save');
 Route::get('contacts/delete/{id}', 'ContactsController@delete');
 
+//Jobs Routes
+Route::get('jobs/{id}', 'JobsController@index');
+Route::get('jobs/{id}/add', 'JobsController@add');
+Route::post('jobs/{id}/create', 'JobsController@create');
+
  

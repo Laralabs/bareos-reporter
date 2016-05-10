@@ -48,4 +48,11 @@ class Schedules extends Model
             return $schedule;
         }
     }
+
+    public static function getScheduleName($id)
+    {
+        $schedule = Schedules::find($id);
+
+        return $schedule->name;
+    }
 }

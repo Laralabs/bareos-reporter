@@ -72,4 +72,17 @@ class Templates extends Model
             return 'Invalid template';
         }
     }
+
+    /**
+     * Return template name for given id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function getTemplateName($id)
+    {
+        $template = Templates::find($id);
+
+        return $template->name;
+    }
 }

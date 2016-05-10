@@ -35,4 +35,23 @@ class Helper
             return '';
         }
     }
+
+    /**
+     * Transform JSON Encoded array into a readable string
+     *
+     * @param $clients
+     * @return string
+     */
+    public static function returnReadableClients($clients)
+    {
+        $clients = json_decode($clients);
+        $string = '';
+
+        foreach($clients as $client)
+        {
+            $string = $string.$client->name.', ';
+        }
+
+        return $string;
+    }
 }

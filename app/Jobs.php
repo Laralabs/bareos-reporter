@@ -3,7 +3,7 @@
  * Bareos Reporter
  * Application for managing Bareos Backup Email Reports
  *
- * Directors Model
+ * Jobs Model
  *
  * @license The MIT License (MIT) See: LICENSE file
  * @copyright Copyright (c) 2016 Matt Clinton
@@ -15,14 +15,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Directors extends Model
+class Jobs extends Model
 {
     /**
      * The table associated to model
      *
      * @var string
      */
-    protected $table = 'directors';
+    protected $table = 'jobs';
 
     /**
      * The attributes that are mass assignable.
@@ -30,23 +30,22 @@ class Directors extends Model
      * @var array
      */
     protected $fillable = [
-        'director_name', 'ip_address', 'director_port', 'catalog_id'
+        'name', 'director_id', 'schedule_id', 'clients', 'template_id', 'contacts'
     ];
 
+    /**
+     * Find job record by given id
+     *
+     * @param $id
+     * @return mixed
+     */
     public static function find($id) {
 
-        $directors = Directors::where('id', $id)->get();
+        $jobs = Jobs::where('id', $id)->get();
 
-        foreach($directors as $director)
+        foreach($jobs as $job)
         {
-            return $director;
+            return $job;
         }
-    }
-
-    public static function getDirectorName($id)
-    {
-        $director = Directors::find($id);
-
-        return $director->director_name;
     }
 }
