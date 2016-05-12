@@ -61,8 +61,10 @@
                                     @endif
                                     @if(!empty($add_frequencies))
                                         @foreach($add_frequencies as $add_frequency)
-                                            @if(in_array($add_frequency->id, $add_freqs))
-                                                <option value="{{ $add_frequency->id }}" selected="selected">{{ $add_frequency->display_name }}</option>
+                                            @if($add_freqs !== false)
+                                                @if(in_array($add_frequency->id, $add_freqs))
+                                                    <option value="{{ $add_frequency->id }}" selected="selected">{{ $add_frequency->display_name }}</option>
+                                                @endif
                                             @else
                                                 <option value="{{ $add_frequency->id }}">{{ $add_frequency->display_name }}</option>
                                             @endif
