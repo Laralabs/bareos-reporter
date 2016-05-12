@@ -34,6 +34,25 @@ class SchedulesOptions extends Model
     ];
 
     /**
+     * Register constants to prevent headaches
+     */
+    const HOURLY        = 1;
+    const DAILY         = 2;
+    const DAILYAT       = 3;
+    const WEEKLY        = 4;
+    const MONTHLY       = 5;
+    const QUARTERLY     = 6;
+    const YEARLY        = 7;
+    const WEEKDAYS      = 8;
+    const SUNDAYS       = 9;
+    const MONDAYS       = 10;
+    const TUESDAYS      = 11;
+    const WEDNESDAYS    = 12;
+    const THURSDAYS     = 13;
+    const FRIDAYS       = 14;
+    const SATURDAYS     = 15;
+
+    /**
      * Find schedule option record by given id
      *
      * @param $id
@@ -63,15 +82,22 @@ class SchedulesOptions extends Model
     {
         $add_frequencies = unserialize($data);
 
-        $string = '';
-
-        foreach($add_frequencies as $add_frequency)
+        if($add_frequencies !== false)
         {
-            $name = SchedulesOptions::getName($add_frequency);
+            $string = '';
 
-            $string = $string.' '.$name;
+            foreach($add_frequencies as $add_frequency)
+            {
+                $name = SchedulesOptions::getName($add_frequency);
+
+                $string = $string.' '.$name;
+            }
+
+            return $string;
         }
-
-        return $string;
+        else
+        {
+            return false;
+        }
     }
 }

@@ -10,10 +10,12 @@ class Kernel extends ConsoleKernel
     /**
      * The Artisan commands provided by your application.
      *
-     * @var array
-     */
+* @var array
+*/
     protected $commands = [
         // Commands\Inspire::class,
+        Commands\RegisterJobs::class,
+        Commands\RunJob::class
     ];
 
     /**
