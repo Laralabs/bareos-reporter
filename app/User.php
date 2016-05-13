@@ -23,4 +23,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Find user record by given id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function find($id) {
+
+        $users = User::where('id', $id)->get();
+
+        foreach($users as $user)
+        {
+            return $user;
+        }
+    }
 }

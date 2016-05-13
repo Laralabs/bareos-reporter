@@ -80,4 +80,13 @@ Route::get('jobs/{director}/edit/{id}', 'JobsController@edit');
 Route::get('jobs/{director}/delete/{id}', 'JobsController@delete');
 Route::post('jobs/{id}/create', 'JobsController@create');
 Route::post('jobs/{director}/save/{id}', 'JobsController@save');
- 
+
+//Settings Routes
+
+    //Users Routes
+    Route::get('settings/users', 'UsersController@index');
+    Route::get('settings/users/add', 'UsersController@add');
+    Route::post('settings/users/create', 'UsersController@create');
+    Route::get('settings/users/edit/{id}', 'UsersController@edit');
+    Route::post('settings/users/save/{id}', 'UsersController@save');
+    Route::get('settings/users/delete/{id}', 'UsersController@delete');
