@@ -90,3 +90,7 @@ Route::post('jobs/{director}/save/{id}', 'JobsController@save');
     Route::get('settings/users/edit/{id}', 'UsersController@edit');
     Route::post('settings/users/save/{id}', 'UsersController@save');
     Route::get('settings/users/delete/{id}', 'UsersController@delete');
+
+    //Email Settings Routes
+    Route::get('settings/email', 'SettingsController@emailIndex');
+    Route::post('settings/email/update', 'SettingsController@emailUpdate');

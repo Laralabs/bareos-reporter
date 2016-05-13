@@ -18,6 +18,7 @@ use App\Contacts;
 use App\Directors;
 use App\Jobs;
 use App\Schedules;
+use App\Settings;
 use App\Templates;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -139,7 +140,7 @@ class RunJob extends Command
                             'job'           =>  $job
                         );
                         $email = Mail::send('email.email'.$jobId.'', $data, function ($message) use ($data) {
-                            $message->from('hello@reporter.com', 'Bareos Reporter');
+                            $message->from(Settings::getEmailFromAddress(), Settings::getEmailFromName());
 
                             $job = $data['job'];
                             $director = Directors::find($job->director_id);
