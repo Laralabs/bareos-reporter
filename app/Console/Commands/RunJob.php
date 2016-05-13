@@ -38,7 +38,7 @@ class RunJob extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Runs specified report job';
 
     /**
      * Create a new command instance.
@@ -111,15 +111,15 @@ class RunJob extends Command
                             }
 
                             //GATHER SUCCESS (T)
-                            $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$ukDate.'%')->get();
+                            $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
                             $successCount = count($successCollection);
 
                             //GATHER ERROR (f + E)
-                            $errorCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'f')->where('JobStatus', '=', 'E')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$ukDate.'%')->get();
+                            $errorCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'f')->where('JobStatus', '=', 'E')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
                             $errorCount = count($errorCollection);
 
                             //GATHER WARNING (W)
-                            $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$ukDate.'%')->get();
+                            $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
                             $warningCount = count($warningCollection);
 
                             $clientArray = array(
