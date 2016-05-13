@@ -148,8 +148,7 @@ class RunJob extends Command
 
                             foreach($contacts as $contact)
                             {
-                                $contactRecord = Contacts::find($contact);
-                                $message->to($contactRecord->email, $contactRecord->name);
+                                $message->to($contact->email, $contact->name);
                             }
                         });
                         $deleteFile = unlink(resource_path('/views/email/'.$fileName));
