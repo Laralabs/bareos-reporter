@@ -29,20 +29,44 @@
                     <form class="form-add-template" method="POST" action="/templates/create">
                         {!! csrf_field() !!}
                         <div class="col-xs-4">
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" name="name" />
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <?php $status = old('status'); ?>
                                 <label for="status">Status:</label>
                                 <select id="frequency-select" class="selectpicker form-control" name="status">
-                                    <option value="1" selected="selected">Enabled</option>
-                                    <option value="0">Disabled</option>
+                                    @if($status == 1)
+                                        <option value="1" selected="selected">Enabled</option>
+                                        <option value="0">Disabled</option>
+                                    @elseif($status == 0)
+                                        <option value="1">Enabled</option>
+                                        <option value="0" selected="selected">Disabled</option>
+                                    @else
+                                        <option value="1" selected="selected">Enabled</option>
+                                        <option value="0">Disabled</option>
+                                    @endif
                                 </select>
+                                @if ($errors->has('status'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
                                 <label for="code">Template Code:</label>
                                 <textarea class="form-control" name="code" style="resize: none;" rows="15"></textarea>
+                                @if ($errors->has('code'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('code') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
                                 <button type="submit" class="btn btn-primary">Save</button>

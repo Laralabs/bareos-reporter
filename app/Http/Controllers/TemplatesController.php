@@ -57,10 +57,17 @@ class TemplatesController extends Controller
     /**
      * Create Template
      *
-     * @return mixed
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->validate($request, [
+            'name'      =>  'required|max:255',
+            'status'    =>  'required',
+            'code'      =>  'required',
+        ]);
+
         $name = Input::get('name');
         $status = Input::get('status');
         $code = Input::get('code');
@@ -102,11 +109,18 @@ class TemplatesController extends Controller
     /**
      * Save Template
      *
+     * @param Request $request
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function save($id)
+    public function save(Request $request, $id)
     {
+        $this->validate($request, [
+            'name'      =>  'required|max:255',
+            'status'    =>  'required',
+            'code'      =>  'required',
+        ]);
+
         $template = Templates::find($id);
 
         $name = Input::get('name');
