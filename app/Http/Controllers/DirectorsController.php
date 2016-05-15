@@ -86,9 +86,10 @@ class DirectorsController extends Controller
     /**
      * Create a director
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return mixed
      */
-    public function create()
+    public function create(Request $request)
     {
         // Director Details
         $director_name      =   Input::get('director_name');
@@ -100,144 +101,176 @@ class DirectorsController extends Controller
         $driver             =   Input::get('driver');
         $engine             =   Input::get('engine');
 
-        if(!empty($director_name) && !empty($dir_ip_address) && !empty($director_port))
-        {
-            try{
-                $director = Directors::create(array(
-                    'director_name'     =>  $director_name,
-                    'ip_address'        =>  $dir_ip_address,
-                    'director_port'     =>  $director_port
-                ));
+        $this->validate($request, [
+            'director_name'         =>  'required|max:255',
+            'director_ip'           =>  'required|max:255',
+            'director_port'         =>  'required|max:255',
+        ]);
 
-                $director->save();
-                $director_id = $director->id;
+        try{
+            $director = Directors::create(array(
+                'director_name'     =>  $director_name,
+                'ip_address'        =>  $dir_ip_address,
+                'director_port'     =>  $director_port
+            ));
 
-                if($driver == 'mysql')
+            $director->save();
+            $director_id = $director->id;
+
+            if($driver == 'mysql')
+            {
+                $this->validate($request, [
+                    'catalog_name'          =>  'required|max:255',
+                    'host-mysql'            =>  'required|max:255',
+                    'port-mysql'            =>  'required|max:255',
+                    'database-mysql'        =>  'required|max:255',
+                    'username-mysql'        =>  'required|max:255',
+                    'charset-mysql'         =>  'required|max:255',
+                    'collation-mysql'       =>  'required|max:255',
+                    'prefix-mysql'          =>  'max:255',
+                    'strict-mysql'          =>  'required'
+                ]);
+
+                $host = Input::get('host-mysql');
+                $port = Input::get('port-mysql');
+                $database = Input::get('database-mysql');
+                $username = Input::get('username-mysql');
+                $password = Input::get('password-mysql');
+                if(!empty($password))
                 {
-                    $host = Input::get('host-mysql');
-                    $port = Input::get('port-mysql');
-                    $database = Input::get('database-mysql');
-                    $username = Input::get('username-mysql');
-                    $password = Input::get('password-mysql');
-                    if(!empty($password))
-                    {
-                        $enc_password = Crypt::encrypt($password);
-                    }
-                    else
-                    {
-                        $enc_password = '';
-                    }
-                    $charset = Input::get('charset-mysql');
-                    $collation = Input::get('collation-mysql');
-                    $prefix = Input::get('prefix-mysql');
-                    $strict = Input::get('strict-mysql');
-
-                    $catalog = Catalogs::create(array(
-                        'director_id'       =>  $director_id,
-                        'name'              =>  $catalog_name,
-                        'driver'            =>  $driver,
-                        'host'              =>  $host,
-                        'port'              =>  $port,
-                        'database'          =>  $database,
-                        'username'          =>  $username,
-                        'password'          =>  $enc_password,
-                        'charset'           =>  $charset,
-                        'collation'         =>  $collation,
-                        'prefix'            =>  $prefix,
-                        'strict'            =>  $strict,
-                        'schema'            =>  '',
-                        'engine'            =>  $engine
-                    ));
-
-                    $catalog->save();
-
-                    $director = Directors::find($director_id);
-
-                    $director->catalog_id = $catalog->id;
-                    $director->save();
-                }
-                elseif($driver == 'pgsql')
-                {
-                    $host = Input::get('host-pgsql');
-                    $port = Input::get('port-pgsql');
-                    $database = Input::get('database-pgsql');
-                    $username = Input::get('username-pgsql');
-                    $password = Input::get('password-pgsql');
-                    if(!empty($password))
-                    {
-                        $enc_password = Crypt::encrypt($password);
-                    }
-                    else
-                    {
-                        $enc_password = '';
-                    }
-                    $charset = Input::get('charset-pgsql');
-                    $prefix = Input::get('prefix-pgsql');
-                    $schema = Input::get('schema-pgsql');
-
-                    $catalog = Catalogs::create(array(
-                        'director_id'       =>  $director_id,
-                        'name'              =>  $catalog_name,
-                        'driver'            =>  $driver,
-                        'host'              =>  $host,
-                        'port'              =>  $port,
-                        'database'          =>  $database,
-                        'username'          =>  $username,
-                        'password'          =>  $enc_password,
-                        'charset'           =>  $charset,
-                        'collation'         =>  '',
-                        'prefix'            =>  $prefix,
-                        'strict'            =>  '',
-                        'schema'            =>  $schema,
-                        'engine'            =>  $engine
-                    ));
-
-                    $catalog->save();
-
-                    $director = Directors::find($director_id);
-
-                    $director->catalog_id = $catalog->id;
-                    $director->save();
-                }
-                elseif($driver == 'sqlite')
-                {
-                    $database = Input::get('database-sqlite');
-                    $prefix = Input::get('prefix-sqlite');
-
-                    $catalog = Catalogs::create(array(
-                        'director_id'       =>  $director_id,
-                        'name'              =>  $catalog_name,
-                        'driver'            =>  $driver,
-                        'host'              =>  '',
-                        'port'              =>  '',
-                        'database'          =>  $database,
-                        'username'          =>  '',
-                        'password'          =>  '',
-                        'charset'           =>  '',
-                        'collation'         =>  '',
-                        'prefix'            =>  $prefix,
-                        'strict'            =>  '',
-                        'schema'            =>  '',
-                        'engine'            =>  ''
-                    ));
-
-                    $catalog->save();
-
-                    $director = Directors::find($director_id);
-
-                    $director->catalog_id = $catalog->id;
-                    $director->save();
+                    $enc_password = Crypt::encrypt($password);
                 }
                 else
                 {
-                    return redirect('directors')->with('error', 'Invalid catalog driver');
+                    $enc_password = '';
                 }
+                $charset = Input::get('charset-mysql');
+                $collation = Input::get('collation-mysql');
+                $prefix = Input::get('prefix-mysql');
+                $strict = Input::get('strict-mysql');
 
-            }catch (Exception $e)
-            {
-                return redirect('directors')->with('error', 'Failed to create director.');
+                $catalog = Catalogs::create(array(
+                    'director_id'       =>  $director_id,
+                    'name'              =>  $catalog_name,
+                    'driver'            =>  $driver,
+                    'host'              =>  $host,
+                    'port'              =>  $port,
+                    'database'          =>  $database,
+                    'username'          =>  $username,
+                    'password'          =>  $enc_password,
+                    'charset'           =>  $charset,
+                    'collation'         =>  $collation,
+                    'prefix'            =>  $prefix,
+                    'strict'            =>  $strict,
+                    'schema'            =>  '',
+                    'engine'            =>  $engine
+                ));
+
+                $catalog->save();
+
+                $director = Directors::find($director_id);
+
+                $director->catalog_id = $catalog->id;
+                $director->save();
             }
-        };
+            elseif($driver == 'pgsql')
+            {
+                $this->validate($request, [
+                    'catalog_name'          =>  'required|max:255',
+                    'host-pgsql'            =>  'required|max:255',
+                    'port-pgsql'            =>  'required|max:255',
+                    'database-pgsql'        =>  'required|max:255',
+                    'username-pgsql'        =>  'required|max:255',
+                    'charset-pgsql'         =>  'required|max:255',
+                    'prefix-pgsql'          =>  'max:255',
+                    'schema-mysql'          =>  'required|max:255'
+                ]);
+
+                $host = Input::get('host-pgsql');
+                $port = Input::get('port-pgsql');
+                $database = Input::get('database-pgsql');
+                $username = Input::get('username-pgsql');
+                $password = Input::get('password-pgsql');
+                if(!empty($password))
+                {
+                    $enc_password = Crypt::encrypt($password);
+                }
+                else
+                {
+                    $enc_password = '';
+                }
+                $charset = Input::get('charset-pgsql');
+                $prefix = Input::get('prefix-pgsql');
+                $schema = Input::get('schema-pgsql');
+
+                $catalog = Catalogs::create(array(
+                    'director_id'       =>  $director_id,
+                    'name'              =>  $catalog_name,
+                    'driver'            =>  $driver,
+                    'host'              =>  $host,
+                    'port'              =>  $port,
+                    'database'          =>  $database,
+                    'username'          =>  $username,
+                    'password'          =>  $enc_password,
+                    'charset'           =>  $charset,
+                    'collation'         =>  '',
+                    'prefix'            =>  $prefix,
+                    'strict'            =>  '',
+                    'schema'            =>  $schema,
+                    'engine'            =>  $engine
+                ));
+
+                $catalog->save();
+
+                $director = Directors::find($director_id);
+
+                $director->catalog_id = $catalog->id;
+                $director->save();
+            }
+            elseif($driver == 'sqlite')
+            {
+                $this->validate($request, [
+                    'catalog_name'          =>  'required|max:255',
+                    'database-sqlite'       =>  'required|max:255',
+                    'prefix-sqlite'         =>  'max:255',
+                ]);
+
+                $database = Input::get('database-sqlite');
+                $prefix = Input::get('prefix-sqlite');
+
+                $catalog = Catalogs::create(array(
+                    'director_id'       =>  $director_id,
+                    'name'              =>  $catalog_name,
+                    'driver'            =>  $driver,
+                    'host'              =>  '',
+                    'port'              =>  '',
+                    'database'          =>  $database,
+                    'username'          =>  '',
+                    'password'          =>  '',
+                    'charset'           =>  '',
+                    'collation'         =>  '',
+                    'prefix'            =>  $prefix,
+                    'strict'            =>  '',
+                    'schema'            =>  '',
+                    'engine'            =>  ''
+                ));
+
+                $catalog->save();
+
+                $director = Directors::find($director_id);
+
+                $director->catalog_id = $catalog->id;
+                $director->save();
+            }
+            else
+            {
+                return redirect('directors')->with('error', 'Invalid catalog driver');
+            }
+
+        }catch (Exception $e)
+        {
+            return redirect('directors')->with('error', 'Failed to create director.');
+        }
 
         return redirect('directors')->with('success', 'Director saved successfully.');
     }
@@ -245,10 +278,11 @@ class DirectorsController extends Controller
     /**
      * Save an edited director
      *
-     * @param \App\Directors $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return mixed
      */
-    public function save($id)
+    public function save(Request $request, $id)
     {
         $director = Directors::find($id);
         $catalog_id = $director->catalog_id;
@@ -258,6 +292,12 @@ class DirectorsController extends Controller
         $director_name = Input::get('director_name');
         $dir_ip_address = Input::get('director_ip');
         $director_port = Input::get('director_port');
+
+        $this->validate($request, [
+            'director_name'         =>  'required|max:255',
+            'director_ip'           =>  'required|max:255',
+            'director_port'         =>  'required|max:255',
+        ]);
 
         // Catalog Details
         $catalog_name = Input::get('catalog_name');
@@ -279,11 +319,28 @@ class DirectorsController extends Controller
         if (isset($driver)) {
             $catalog->driver = $driver;
         }
+
+        $this->validate($request, [
+            'catalog_name'          =>  'required|max:255',
+            'driver'                =>  'required|max:255',
+        ]);
+
         if (isset($engine)) {
             $catalog->engine = $engine;
         }
 
         if ($driver == 'mysql') {
+
+            $this->validate($request, [
+                'host-mysql'            =>  'required|max:255',
+                'port-mysql'            =>  'required|max:255',
+                'database-mysql'        =>  'required|max:255',
+                'username-mysql'        =>  'required|max:255',
+                'charset-mysql'         =>  'required|max:255',
+                'collation-mysql'       =>  'required|max:255',
+                'prefix-mysql'          =>  'max:255',
+                'strict-mysql'          =>  'required'
+            ]);
 
             $host = Input::get('host-mysql');
             $port = Input::get('port-mysql');
@@ -344,6 +401,16 @@ class DirectorsController extends Controller
 
         } elseif ($driver == 'pgsql') {
 
+            $this->validate($request, [
+                'host-pgsql'            =>  'required|max:255',
+                'port-pgsql'            =>  'required|max:255',
+                'database-pgsql'        =>  'required|max:255',
+                'username-pgsql'        =>  'required|max:255',
+                'charset-pgsql'         =>  'required|max:255',
+                'prefix-pgsql'          =>  'max:255',
+                'schema-mysql'          =>  'required|max:255'
+            ]);
+
             $host = Input::get('host-pgsql');
             $port = Input::get('port-pgsql');
             $database = Input::get('database-pgsql');
@@ -397,6 +464,11 @@ class DirectorsController extends Controller
             return redirect('directors')->with('success', 'Director updated successfully.');
 
         } elseif ($driver == 'sqlite') {
+
+            $this->validate($request, [
+                'database-sqlite'       =>  'required|max:255',
+                'prefix-sqlite'         =>  'max:255',
+            ]);
 
             $database = Input::get('database-sqlite');
             $prefix = Input::get('prefix-sqlite');
