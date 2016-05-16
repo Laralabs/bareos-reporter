@@ -29,17 +29,32 @@
                     <form class="form-add-contact" method="POST" action="/contacts/create">
                         {!! csrf_field() !!}
                         <div class="col-xs-4">
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
                                 <label for="contact_name">Name:</label>
-                                <input type="text" class="form-control" name="contact_name" />
+                                <input type="text" class="form-control" name="contact_name" value="{{ old('contact_name') }}"/>
+                                @if ($errors->has('contact_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
                                 <label for="contact_email">Email Address:</label>
-                                <input type="text" class="form-control" name="contact_email" />
+                                <input type="text" class="form-control" name="contact_email" value="{{ old('contact_email') }}" />
+                                @if ($errors->has('contact_email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_mobile') ? ' has-error' : '' }}">
                                 <label for="contact_mobile">Mobile Number:</label>
-                                <input type="text" class="form-control" name="contact_mobile" />
+                                <input type="text" class="form-control" name="contact_mobile" value="{{ old('contact_mobile') }}" />
+                                @if ($errors->has('contact_mobile'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_mobile') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
                                 <button type="submit" class="btn btn-primary btn-lg">Save</button>

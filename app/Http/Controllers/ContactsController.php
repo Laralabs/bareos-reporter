@@ -57,16 +57,22 @@ class ContactsController extends Controller
     /**
      * Create Contact
      *
-     * @return mixed
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->validate($request, [
+            'contact_name'          =>  'required|max:255',
+            'contact_email'         =>  'required|email|max:255|unique:contacts',
+            'contact_mobile'        =>  'max:20'
+        ]);
+
         $name = Input::get('contact_name');
         $email = Input::get('contact_email');
         $mobile = Input::get('contact_mobile');
 
-        if(!empty($name) && !empty($email))
-        {
+        try{
             $contact = Contacts::create(array(
                 'name'      =>  $name,
                 'email'     =>  $email,
@@ -76,10 +82,8 @@ class ContactsController extends Controller
             $contact->save();
 
             return redirect('contacts')->with('success', 'Contact created successfully');
-        }
-        else
-        {
-            return redirect('contacts')->with('error', 'Make sure name and email are valid');
+        }catch(Exception $e) {
+            return redirect('contacts')->with('error', 'Unable to save contact');
         }
     }
 
@@ -99,11 +103,18 @@ class ContactsController extends Controller
     /**
      * Save Contact
      *
+     * @param Request $request
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function save($id)
+    public function save(Request $request, $id)
     {
+        $this->validate($request, [
+            'contact_name'          =>  'required|max:255',
+            'contact_email'         =>  'required|email|max:255|unique:contacts',
+            'contact_mobile'        =>  'max:20'
+        ]);
+
         $contact = Contacts::find($id);
 
         $name = Input::get('contact_name');

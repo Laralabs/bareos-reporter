@@ -29,20 +29,32 @@
                     <div class="col-xs-4">
                         <form class="form-edit-contact" method="POST" action="/contacts/save/{{ $contact->id }}">
                             {!! csrf_field() !!}
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
                                 <label for="contact_name">Name:</label>
-                                <input type="text" class="form-control" name="contact_name" value="{{ $contact->name }}" />
+                                <input type="text" class="form-control" name="contact_name" value="{{ $contact->name }}"/>
+                                @if ($errors->has('contact_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
                                 <label for="contact_email">Email Address:</label>
-                                <input type="text" class="form-control" name="contact_email" value="{{ $contact->email }}"/>
+                                <input type="text" class="form-control" name="contact_email" value="{{ $contact->email }}" />
+                                @if ($errors->has('contact_email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contact_mobile') ? ' has-error' : '' }}">
                                 <label for="contact_mobile">Mobile Number:</label>
-                                <input type="text" class="form-control" name="contact_mobile" value="{{ $contact->mobile }}"/>
-                            </div>
-                            <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <input type="text" class="form-control" name="contact_mobile" value="{{ $contact->mobile }}" />
+                                @if ($errors->has('contact_mobile'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_mobile') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </form>
                         <div class="form-group" style="margin-top: 15px;">
