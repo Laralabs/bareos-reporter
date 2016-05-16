@@ -56,6 +56,9 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                         <div class="form-group" style="margin-top: 15px;">
                             <button class="btn btn-danger" data-record-id="{{ $contact->id }}" data-record-title="{{ $contact->name }}" data-toggle="modal" data-target="#confirm-contact-delete">Delete</button>
