@@ -31,16 +31,22 @@
                     <div class="col-xs-6 col-md-4 col-lg-4">
                         <form class="form-edit-schedule" method="POST" action="/schedules/save/{{ $schedule->id }}">
                             {!! csrf_field() !!}
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Name:</label>
-                                <input type="text" class="form-control" name="name" value="{{ $schedule->name }}"/>
+                                <input type="text" class="form-control" name="name" value="{{ $schedule->name }}" />
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label for="frequency">Frequency:</label>
+                                <label for="frequency{{ $errors->has('frequency') ? ' has-error' : '' }}">Frequency:</label>
+                                <?php $freqOld = old('frequency'); if(empty($freqOld)){ $freqOld = $schedule->freq; }; ?>
                                 <select id="frequency-select" class="selectpicker form-control" name="frequency">
                                     @if(!empty($frequencies))
                                         @foreach($frequencies as $frequency)
-                                            @if($frequency->id == $schedule->freq)
+                                            @if($frequency->id == $freqOld)
                                                 <option value="{{ $frequency->id }}" selected="selected">{{ $frequency->display_name }}</option>
                                             @else
                                                 <option value="{{ $frequency->id }}">{{ $frequency->display_name }}</option>
@@ -50,8 +56,13 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                 </select>
+                                @if ($errors->has('frequency'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('frequency') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('add_frequency') ? ' has-error' : '' }}">
                                 <label for="add_frequency[]">Additional Frequency:</label>
                                 <select id="add-frequency-select" class="selectpicker form-control" name="add_frequency[]" multiple>
                                     @if($add_freqs)
@@ -73,6 +84,11 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                 </select>
+                                @if ($errors->has('add_frequency'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('add_frequency') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="time">Time:</label>

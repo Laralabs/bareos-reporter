@@ -64,11 +64,25 @@ class SchedulesController extends Controller
      *
      * @return mixed
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->validate($request, [
+            'name'          =>  'required|max:255',
+            'frequency'     =>  'required|max:255',
+            'add_frequency' =>  'max:255',
+        ]);
+
         $name = Input::get('name');
         $frequency = Input::get('frequency');
         $add_frequency = Input::get('add_frequency');
+        $time = Input::get('time');
+
+        if($frequency == SchedulesOptions::DAILYAT)
+        {
+            $this->validate($request, [
+                'time'          =>  'required|max:255',
+            ]);
+        }
         if($add_frequency)
         {
             $add_freq_serial = serialize($add_frequency);
@@ -77,9 +91,8 @@ class SchedulesController extends Controller
         {
             $add_freq_serial = $add_frequency;
         }
-        $time = Input::get('time');
 
-        if(!empty($name) && !empty($frequency) && $frequency != -1)
+        if($frequency != -1)
         {
             try {
                 $scheduleRecord = Schedules::create(array(
@@ -100,7 +113,7 @@ class SchedulesController extends Controller
         }
         else
         {
-            return redirect('schedules')->with('error', 'Please make sure name and frequency are valid');
+            return redirect('schedules')->with('error', 'Please select a frequency');
         }
     }
 
@@ -125,22 +138,33 @@ class SchedulesController extends Controller
      * @param $id
      * @return mixed
      */
-    public function save($id)
+    public function save(Request $request, $id)
     {
+        $this->validate($request, [
+            'name'          =>  'required|max:255',
+            'frequency'     =>  'required|max:255',
+            'add_frequency' =>  'max:255',
+        ]);
         $schedule = Schedules::find($id);
 
         $name = Input::get('name');
         $frequency = Input::get('frequency');
         $add_frequency = Input::get('add_frequency');
+        $time = Input::get('time');
+
+        if($frequency == SchedulesOptions::DAILYAT)
+        {
+            $this->validate($request, [
+                'time'          =>  'required|max:255',
+            ]);
+        }
         if($add_frequency)
         {
             $add_freq_serial = serialize($add_frequency);
         }
-        else
-        {
+        else {
             $add_freq_serial = $add_frequency;
         }
-        $time = Input::get('time');
 
         if(!empty($name) && !empty($frequency) && $frequency != -1)
         {
