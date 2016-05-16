@@ -30,7 +30,7 @@ class Jobs extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'director_id', 'schedule_id', 'clients', 'template_id', 'contacts'
+        'name', 'status', 'director_id', 'schedule_id', 'report_type', 'clients', 'template_id', 'contacts'
     ];
 
     /**
@@ -46,6 +46,26 @@ class Jobs extends Model
         foreach($jobs as $job)
         {
             return $job;
+        }
+    }
+
+    /**
+     * Get job status. Return boolean.
+     *
+     * @param $id
+     * @return bool
+     */
+    public static function getJobStatus($id)
+    {
+        $job = Jobs::find($id);
+
+        if($job->status == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

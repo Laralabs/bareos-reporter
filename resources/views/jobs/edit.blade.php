@@ -31,13 +31,38 @@
 
                 <div class="panel-body">
                     <div class="col-xs-6 col-md-4 col-lg-4">
-                        <form class="form-add-job" method="POST" action="/jobs/{{ $director->id }}/save/{{ $job->id }}">
+                        <form class="form-edit-job" method="POST" action="/jobs/{{ $director->id }}/save/{{ $job->id }}">
                             {!! csrf_field() !!}
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Name:</label>
-                                <input type="text" class="form-control" name="name" value="{{ $job->name }}" />
+                                <input type="text" class="form-control" name="name" value="{{ $job->name }}"/>
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                <label for="status">Status:</label>
+                                <select id="status-select" class="selectpicker form-control" name="status">
+                                    @if($job->status == 1)
+                                        <option value="1" selected="selected">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    @elseif($job->status == 0)
+                                        <option value="0" selected="selected">Disabled</option>
+                                        <option value="1">Enabled</option>
+                                    @else
+                                        <option value="1" selected="selected">Enabled</option>
+                                        <option value="0">Disabled</option>
+                                    @endif
+                                </select>
+                                @if ($errors->has('status'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group{{ $errors->has('schedule') ? ' has-error' : '' }}">
                                 <label for="schedule">Schedule:</label>
                                 <select id="schedule-select" class="selectpicker form-control" name="schedule">
                                     @if(!empty($schedules))
@@ -52,12 +77,36 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                 </select>
+                                @if ($errors->has('schedule'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('schedule') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('report-type') ? ' has-error' : '' }}">
+                                <label for="report-type">Report Type:</label>
+                                <select id="report-type-select" class="selectpicker form-control" name="report-type">
+                                    @if($job->report_type == 1)
+                                        <option value="1" selected="selected">All Selected Clients (One Report)</option>
+                                        <option value="2">Separate report for each selected Client</option>
+                                    @elseif($job->report_type == 2)
+                                        <option value="1">All Selected Clients (One Report)</option>
+                                        <option value="2" selected="selected">Separate report for each selected Client</option>
+                                    @else
+                                        <option value="1" selected="selected">All Selected Clients (One Report)</option>
+                                        <option value="2">Separate report for each selected Client</option>
+                                    @endif
+                                </select>
+                                @if ($errors->has('report-type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('report-type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group{{ $errors->has('clients') ? ' has-error' : '' }}">
                                 <label for="clients[]">Clients:</label>
                                 <select id="clients-select" class="selectpicker form-control" name="clients[]" multiple>
                                     @if(!empty($clients))
-                                        <option value="-1">None</option>
                                         @foreach($clients as $client)
                                             <option value="{{ $client->ClientId }}">{{ $client->Name }}</option>
                                         @endforeach
@@ -72,8 +121,13 @@
                                         @endforeach
                                     @endif
                                 </select>
+                                @if ($errors->has('clients'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('clients') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('template') ? ' has-error' : '' }}">
                                 <label for="template">Template:</label>
                                 <select id="template-select" class="selectpicker form-control" name="template">
                                     @if(!empty($templates))
@@ -88,12 +142,16 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                 </select>
+                                @if ($errors->has('template'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('template') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('contacts') ? ' has-error' : '' }}">
                                 <label for="contacts[]">Recipient Contacts:</label>
                                 <select id="contacts-select" class="selectpicker form-control" name="contacts[]" data-live-search="true" multiple>
                                     @if(!empty($contacts))
-                                        <option value="-1">None</option>
                                         @foreach($contacts as $contact)
                                             <option value="{{ $contact->id }}">{{ $contact->name }} ({{ $contact->email }})</option>
                                         @endforeach
@@ -106,11 +164,16 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                 </select>
+                                @if ($errors->has('contacts'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contacts') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group" style="margin-top: 30px;">
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
-                        <div class="form-group" style="margin-top: 30px;">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
                         <div class="form-group" style="margin-top: 15px;">
                             <button class="btn btn-danger" data-record-id="{{ $job->id }}" data-director-id="{{ $job->director_id }}" data-record-title="{{ $job->name }}" data-toggle="modal" data-target="#confirm-job-delete">Delete</button>
                         </div>

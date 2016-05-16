@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
@@ -75,7 +76,7 @@ class JobsController extends Controller
      * @param $id
      * @return mixed
      */
-    public static function add($id)
+    public function add($id)
     {
         $director = Directors::find($id);
         $schedules = Schedules::all();
@@ -102,67 +103,80 @@ class JobsController extends Controller
      * @param $id
      * @return mixed
      */
-    public static function create($id)
+    public function create(Request $request, $id)
     {
+        $this->validate($request, [
+            'name'          =>  'required|unique:jobs|max:255',
+            'status'        =>  'required',
+            'schedule'      =>  'required',
+            'report-type'   =>  'required',
+            'clients'       =>  'required',
+            'template'      =>  'required',
+            'contacts'      =>  'required',
+        ]);
+
         $name = Input::get('name');
         $schedule = Input::get('schedule');
         $clients_input = Input::get('clients');
         $template = Input::get('template');
         $contacts = Input::get('contacts');
+        $report_type = Input::get('report-type');
+        $status = Input::get('status');
         $clients = array();
 
         $redirectUrl = '/jobs/'.$id;
 
-        if(!empty($name))
+        foreach($clients_input as $client_input)
         {
-            foreach($clients_input as $client_input)
-            {
-                $bareosClients = DB::connection(Catalogs::getCatalogName($id))->table('Client')->where('ClientId', '=', $client_input)->get();
-
-                foreach($bareosClients as $bareosClient)
-                {
-                    $client = array(
-                        'id'        =>  $client_input,
-                        'name'      =>  $bareosClient->Name
-                    );
-                    array_push($clients, $client);
-                }
-            }
-            $clients = json_encode($clients);
-            $contactsFull = [];
-            foreach($contacts as $contact)
-            {
-                $contactRecord = Contacts::find($contact);
-                $contactArray = [
-                    'id'        =>  $contactRecord->id,
-                    'name'      =>  $contactRecord->name,
-                    'email'     =>  $contactRecord->email,
-                    'mobile'    =>  $contactRecord->mobile
-                ];
-
-                array_push($contactsFull, $contactArray);
-            }
-            $contacts = json_encode($contactsFull);
-
             try {
-                $job = Jobs::create(array(
-                    'name'          =>  $name,
-                    'director_id'   =>  $id,
-                    'schedule_id'   =>  $schedule,
-                    'clients'       =>  $clients,
-                    'template_id'   =>  $template,
-                    'contacts'      =>  $contacts
-                ));
-
-                return redirect($redirectUrl)->with('success', 'Job created successfully');
-            }catch(Exception $e)
+                $bareosClients = DB::connection(Catalogs::getCatalogName($id))->table('Client')->where('ClientId', '=', $client_input)->get();
+            }catch(\PDOException $e)
             {
-                return redirect()->back()->with('error', 'Unable to create job');
+                Log::error($e.' Error conncting to director catalog');
+                return redirect($redirectUrl)->with('error', 'Unable to connect to Director Catalog');
+            }
+
+            foreach($bareosClients as $bareosClient)
+            {
+                $client = array(
+                    'id'        =>  $client_input,
+                    'name'      =>  $bareosClient->Name
+                );
+                array_push($clients, $client);
             }
         }
-        else
+        $clients = json_encode($clients);
+        $contactsFull = [];
+        foreach($contacts as $contact)
         {
-            return redirect()->back()->with('error', 'Please input a name');
+            $contactRecord = Contacts::find($contact);
+            $contactArray = [
+                'id'        =>  $contactRecord->id,
+                'name'      =>  $contactRecord->name,
+                'email'     =>  $contactRecord->email,
+                'mobile'    =>  $contactRecord->mobile
+            ];
+
+            array_push($contactsFull, $contactArray);
+        }
+        $contacts = json_encode($contactsFull);
+
+        try {
+            $job = Jobs::create(array(
+                'name'          =>  $name,
+                'status'        =>  $status,
+                'director_id'   =>  $id,
+                'schedule_id'   =>  $schedule,
+                'report_type'   =>  $report_type,
+                'clients'       =>  $clients,
+                'template_id'   =>  $template,
+                'contacts'      =>  $contacts
+            ));
+
+            return redirect($redirectUrl)->with('success', 'Job created successfully');
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with('error', 'Unable to create job');
         }
     }
 
@@ -183,12 +197,24 @@ class JobsController extends Controller
         $clients = '';
         if($connection_name)
         {
-            $clients = DB::connection($connection_name)->table('Client');
+            try {
+                $clients = DB::connection($connection_name)->table('Client');
+            }catch(\PDOException $e)
+            {
+                Log::error($e.' Error connecting to director catalog');
+                return redirect()->back()->with('error', 'Unable to connect to Director Catalog');
+            }
         }
         else
         {
-            $connection_name = Catalogs::getCatalogName($director);
-            $clients = DB::connection($connection_name)->table('Client');
+            try {
+                $connection_name = Catalogs::getCatalogName($director);
+                $clients = DB::connection($connection_name)->table('Client');
+            }catch(\PDOException $e)
+            {
+                Log::error($e.' Error connecting to director catalog');
+                return redirect()->back()->with('error', 'Unable to connect to Director Catalog');
+            }
         }
         $jobClients = json_decode($job->clients);
         foreach($jobClients as $jobClient)
@@ -213,86 +239,104 @@ class JobsController extends Controller
      * @param $id
      * @return mixed
      */
-    public function save($director, $id)
+    public function save(Request $request, $director, $id)
     {
+        $this->validate($request, [
+            'name'          =>  'required|max:255',
+            'status'        =>  'required',
+            'schedule'      =>  'required',
+            'report-type'   =>  'required',
+            'clients'       =>  'required',
+            'template'      =>  'required',
+            'contacts'      =>  'required',
+        ]);
+
         $job = Jobs::find($id);
         $name = Input::get('name');
         $schedule = Input::get('schedule');
         $clients_input = Input::get('clients');
         $template = Input::get('template');
         $contacts = Input::get('contacts');
+        $report_type = Input::get('report-type');
+        $status = Input::get('status');
         $clients = array();
 
         $redirectUrl = '/jobs/'.$director;
 
-        if(!empty($name))
+        foreach($clients_input as $client_input)
         {
-            foreach($clients_input as $client_input)
-            {
-                $bareosClients = DB::connection(Catalogs::getCatalogName($director))->table('Client')->where('ClientId', '=', $client_input)->get();
-
-                foreach($bareosClients as $bareosClient)
-                {
-                    $client = array(
-                        'id'        =>  $client_input,
-                        'name'      =>  $bareosClient->Name
-                    );
-                    array_push($clients, $client);
-                }
-            }
-            $clients = json_encode($clients);
-            $contactsFull = [];
-            foreach($contacts as $contact)
-            {
-                $contactRecord = Contacts::find($contact);
-                $contactArray = [
-                    'id'        =>  $contactRecord->id,
-                    'name'      =>  $contactRecord->name,
-                    'email'     =>  $contactRecord->email,
-                    'mobile'    =>  $contactRecord->mobile
-                ];
-
-                array_push($contactsFull, $contactArray);
-            }
-            $contacts = json_encode($contactsFull);
-            if(isset($name))
-            {
-                $job->name = $name;
-            }
-            if(isset($director))
-            {
-                $job->director_id = $director;
-            }
-            if(isset($schedule))
-            {
-                $job->schedule_id = $schedule;
-            }
-            if(isset($clients))
-            {
-                $job->clients = $clients;
-            }
-            if(isset($template))
-            {
-                $job->template_id = $template;
-            }
-            if(isset($contacts))
-            {
-                $job->contacts = $contacts;
-            }
-
             try {
-                $job->save();
-
-                return redirect($redirectUrl)->with('success', 'Job saved successfully');
-            }catch(Exception $e)
+                $bareosClients = DB::connection(Catalogs::getCatalogName($director))->table('Client')->where('ClientId', '=', $client_input)->get();
+            }catch(\PDOException $e)
             {
-                return redirect()->back()->with('error', 'Unable to save job');
+                Log::error($e.' Error connecting to director catalog');
+                return redirect()->back()->with('error', 'Unable to connect to Director Catalog');
             }
 
+            foreach($bareosClients as $bareosClient)
+            {
+                $client = array(
+                    'id'        =>  $client_input,
+                    'name'      =>  $bareosClient->Name
+                );
+                array_push($clients, $client);
+            }
         }
-        else
+        $clients = json_encode($clients);
+        $contactsFull = [];
+        foreach($contacts as $contact)
         {
-            return redirect()->back()->with('error', 'Please input a name');
+            $contactRecord = Contacts::find($contact);
+            $contactArray = [
+                'id'        =>  $contactRecord->id,
+                'name'      =>  $contactRecord->name,
+                'email'     =>  $contactRecord->email,
+                'mobile'    =>  $contactRecord->mobile
+            ];
+
+            array_push($contactsFull, $contactArray);
+        }
+        $contacts = json_encode($contactsFull);
+        if(isset($name))
+        {
+            $job->name = $name;
+        }
+        if(isset($status))
+        {
+            $job->status = $status;
+        }
+        if(isset($director))
+        {
+            $job->director_id = $director;
+        }
+        if(isset($schedule))
+        {
+            $job->schedule_id = $schedule;
+        }
+        if(isset($report_type))
+        {
+            $job->report_type = $report_type;
+        }
+        if(isset($clients))
+        {
+            $job->clients = $clients;
+        }
+        if(isset($template))
+        {
+            $job->template_id = $template;
+        }
+        if(isset($contacts))
+        {
+            $job->contacts = $contacts;
+        }
+
+        try {
+            $job->save();
+
+            return redirect($redirectUrl)->with('success', 'Job saved successfully');
+        }catch(Exception $e)
+        {
+            return redirect()->back()->with('error', 'Unable to save job');
         }
     }
 

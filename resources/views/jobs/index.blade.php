@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th>Director</th>
                                     <th>Schedule</th>
                                     <th>Clients</th>
@@ -47,6 +48,13 @@
                                     <tr>
                                         <td>{{ $job->id }}</td>
                                         <td>{{ $job->name }}</td>
+                                        <td>
+                                            @if(\App\Jobs::getJobStatus($job->id) === true)
+                                                <span class="label label-success">Enabled</span>
+                                            @else
+                                                <span class="label label-danger">Disabled</span>
+                                            @endif
+                                        </td>
                                         <td>{{ \App\Directors::getDirectorName($job->director_id) }}</td>
                                         <td>{{ \App\Schedules::getScheduleName($job->schedule_id) }}</td>
                                         <td>{{ \App\Helper::returnReadableClients($job->clients) }}</td>
