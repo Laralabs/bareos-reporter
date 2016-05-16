@@ -136,27 +136,12 @@ class UsersController extends Controller
         $email = Input::get('email');
         $password = Input::get('password');
 
-        if(empty($password) && $email != $user->email)
+        if(empty($password))
         {
             $this->validate($request, [
                 'username' => 'required|max:255',
                 'name'     => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
-            ]);
-        }
-        elseif(empty($password) && $email == $user->email)
-        {
-            $this->validate($request, [
-                'username' => 'required|max:255',
-                'name'     => 'required|max:255',
-            ]);
-        }
-        elseif($email == $user->email)
-        {
-            $this->validate($request, [
-                'username' => 'required|max:255',
-                'name'     => 'required|max:255',
-                'password' => 'required|min:6|confirmed',
+                'email' => 'required|email|max:255|unique:users,id',
             ]);
         }
         else
@@ -164,7 +149,7 @@ class UsersController extends Controller
             $this->validate($request, [
                 'username' => 'required|max:255',
                 'name'     => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
+                'email' => 'required|email|max:255|unique:users,id',
                 'password' => 'required|min:6|confirmed',
             ]);
         }

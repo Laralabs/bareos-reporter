@@ -64,12 +64,12 @@ class ContactsController extends Controller
     {
         $this->validate($request, [
             'contact_name'          =>  'required|max:255',
-            'contact_email'         =>  'required|email|max:255|unique:contacts',
+            'email'                 =>  'required|email|max:255|unique:contacts',
             'contact_mobile'        =>  'max:20'
         ]);
 
         $name = Input::get('contact_name');
-        $email = Input::get('contact_email');
+        $email = Input::get('email');
         $mobile = Input::get('contact_mobile');
 
         try{
@@ -111,14 +111,14 @@ class ContactsController extends Controller
     {
         $this->validate($request, [
             'contact_name'          =>  'required|max:255',
-            'contact_email'         =>  'required|email|max:255|unique:contacts',
+            'email'                 =>  'required|email|max:255|unique:contacts,id',
             'contact_mobile'        =>  'max:20'
         ]);
 
         $contact = Contacts::find($id);
 
         $name = Input::get('contact_name');
-        $email = Input::get('contact_email');
+        $email = Input::get('email');
         $mobile = Input::get('contact_mobile');
 
         try {

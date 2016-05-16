@@ -38,12 +38,12 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
-                                <label for="contact_email">Email Address:</label>
-                                <input type="text" class="form-control" name="contact_email" value="{{ $contact->email }}" />
-                                @if ($errors->has('contact_email'))
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email">Email Address:</label>
+                                <input type="text" class="form-control" name="email" value="{{ $contact->email }}" />
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('contact_email') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>

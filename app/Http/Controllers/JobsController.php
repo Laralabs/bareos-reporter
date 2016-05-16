@@ -242,7 +242,7 @@ class JobsController extends Controller
     public function save(Request $request, $director, $id)
     {
         $this->validate($request, [
-            'name'          =>  'required|max:255',
+            'name'          =>  'required|unique:jobs,id|max:255',
             'status'        =>  'required',
             'schedule'      =>  'required',
             'report-type'   =>  'required',
