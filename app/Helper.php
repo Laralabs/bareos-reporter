@@ -15,9 +15,6 @@ namespace App;
 
 class Helper
 {
-
-    const REPORT_TYPE_ALL       =   1;
-    const REPORT_TYPE_SEPARATE  =   2;
     /**
      * secondsToTime function.
      *

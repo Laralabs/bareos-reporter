@@ -33,6 +33,9 @@ class Jobs extends Model
         'name', 'status', 'director_id', 'schedule_id', 'report_type', 'clients', 'template_id', 'contacts'
     ];
 
+    const REPORT_TYPE_ALL       =   1;
+    const REPORT_TYPE_SEPARATE  =   2;
+
     /**
      * Find job record by given id
      *
