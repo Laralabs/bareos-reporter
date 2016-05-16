@@ -103,6 +103,7 @@ class RunJob extends Command
                                 if(count($usCollection) == 0)
                                 {
                                     Log::error('No US or UK Dates Found in Job Data');
+                                    $deleteFile = unlink(resource_path('/views/email/'.$fileName));
                                     exit();
                                 }
                                 else

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php
-        $directorName = $director->director_name;
-    ?>
-    <title>{{ $directorName }} Backup Report: {{ date('Y-m-d') }}</title>
+    <title>{{ $director->director_name }} Backup Report: {{ date('Y-m-d') }}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -38,7 +35,7 @@
 <body>
 <div class="container">
     <div class="content">
-        <h2><strong>Director: </strong>{{ $directorName }}</h2>
+        <h2><strong>Director: </strong>{{ $director->director_name }}</h2>
         <div class="table-container">
             <table id="report-table" class="table table-bordered">
                 <thead>
