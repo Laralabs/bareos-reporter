@@ -107,8 +107,8 @@ class RunJob extends Command
                              * Date Check End
                              */
 
-                            // Let's build up the report data.
-                            $clientData = array();
+                            // Build Report Data
+                            $clientData = [];
                             foreach ($clients as $client) {
 
                                 //GATHER SUCCESS (T)
@@ -123,22 +123,23 @@ class RunJob extends Command
                                 $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
                                 $warningCount = count($warningCollection);
 
-                                $clientArray = array(
+                                $clientArray = [
                                     'id' => $client->id,
                                     'name' => $client->name,
                                     'success' => $successCount,
                                     'error' => $errorCount,
                                     'warning' => $warningCount
-                                );
+                                ];
 
                                 array_push($clientData, $clientArray);
                             }
 
-                            $data = array(
+                            // Send Email Report
+                            $data = [
                                 'clients' => $clientData,
                                 'director' => $director,
                                 'job' => $job
-                            );
+                            ];
                             $email = Mail::send('email.email' . $jobId . '', $data, function ($message) use ($data) {
                                 $message->from(Settings::getEmailFromAddress(), Settings::getEmailFromName());
 
@@ -189,9 +190,10 @@ class RunJob extends Command
                              * Date Check End
                              */
 
-                            // Let's build up the report data.
-                            $clientData = array();
+                            // Build and Email Report
                             foreach ($clients as $client) {
+
+                                $clientData = [];
 
                                 //GATHER SUCCESS (T)
                                 $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
@@ -205,13 +207,13 @@ class RunJob extends Command
                                 $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
                                 $warningCount = count($warningCollection);
 
-                                $clientArray = array(
+                                $clientArray = [
                                     'id' => $client->id,
                                     'name' => $client->name,
                                     'success' => $successCount,
                                     'error' => $errorCount,
-                                    'warning' => $warningCount
-                                );
+                                    'warning' => $warningCount,
+                                ];
 
                                 array_push($clientData, $clientArray);
 
@@ -228,7 +230,7 @@ class RunJob extends Command
                                     $job = $data['job'];
                                     $director = Directors::find($job->director_id);
                                     $contacts = json_decode($job->contacts);
-                                    $message->subject('' . $director->director_name . ' Client Backup Report: '. date('d-m-Y') . ' '.$data['client_name']);
+                                    $message->subject('' . $director->director_name . ' Client Backup Report: ' . $data['client_name'].' '.date('d-m-Y'));
 
                                     foreach ($contacts as $contact) {
                                         $message->to($contact->email, $contact->name);

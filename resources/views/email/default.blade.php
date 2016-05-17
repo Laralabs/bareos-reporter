@@ -24,7 +24,7 @@
     <div class="content">
         <h2><strong>Director: </strong>{{ $director->director_name }}</h2>
         @if($client_report == \App\Jobs::REPORT_TYPE_SEPARATE)
-            <h3><strong>Client Report</strong></h3>
+            <h3><strong>Client Report: {{ $client_name }}</strong></h3>
         @endif
         <div class="table-container">
             <table id="report-table" class="pure-table">
