@@ -83,6 +83,10 @@ class Templates extends Model
     {
         $template = Templates::find($id);
 
-        return $template->name;
+        if($template != null) {
+            return $template->name;
+        }else{
+            return '';
+        }
     }
 }

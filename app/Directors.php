@@ -47,6 +47,10 @@ class Directors extends Model
     {
         $director = Directors::find($id);
 
-        return $director->director_name;
+        if($director != null) {
+            return $director->director_name;
+        }else{
+            return '';
+        }
     }
 }

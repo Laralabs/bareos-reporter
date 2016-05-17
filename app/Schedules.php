@@ -53,6 +53,10 @@ class Schedules extends Model
     {
         $schedule = Schedules::find($id);
 
-        return $schedule->name;
+        if($schedule != null) {
+            return $schedule->name;
+        }else{
+            return '';
+        }
     }
 }
