@@ -64,96 +64,180 @@ class RunJob extends Command
             $job = Jobs::find($jobId);
             if($job != null)
             {
-                $schedule = Schedules::find($job->schedule_id);
+                //GATHER DATA NEEDED FOR BOTH
                 $director = Directors::find($job->director_id);
                 $template = Templates::find($job->template_id);
                 $catalog = Catalogs::getDirectorCatalog($job->director_id);
                 $catalogName = $catalog->name;
 
                 $clients = json_decode($job->clients);
-                $contacts = json_decode($job->contacts);
 
-                $fileName = 'email'.$jobId.'.blade.php';
-                $code = $template->template_code;
+                if($job->report_type == Jobs::REPORT_TYPE_ALL) {
 
-                $blade = fopen(resource_path('/views/email/'.$fileName), 'w');
-                if($blade !== false)
-                {
-                    fwrite($blade, $code);
-                    $tempBlade = fclose($blade);
+                    $fileName = 'email'.$jobId.'.blade.php';
+                    $code = $template->template_code;
 
-                    if($tempBlade === true)
-                    {
-                        // Let's build up the report data.
-                        $clientData = array();
-                        foreach($clients as $client)
-                        {
+                    $blade = fopen(resource_path('/views/email/'.$fileName), 'w');
+                    if($blade !== false) {
+                        fwrite($blade, $code);
+                        $tempBlade = fclose($blade);
+
+                        if ($tempBlade === true) {
+                            /*
+                             * Detect if we are using US or UK Dates
+                             */
                             $ukDate = date('Y-m-d');
                             $usDate = date('Y-d-m');
                             $datePattern = '';
-                            $ukCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%'.$ukDate.'%')->get();
-                            if(count($ukCollection) > 0)
-                            {
+                            $ukCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%' . $ukDate . '%')->get();
+                            if (count($ukCollection) > 0) {
                                 $datePattern = $ukDate;
-                            }
-                            else
-                            {
-                                $usCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%'.$usDate.'%')->get();
+                            } else {
+                                $usCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%' . $usDate . '%')->get();
 
-                                if(count($usCollection) == 0)
-                                {
+                                if (count($usCollection) == 0) {
                                     Log::error('No US or UK Dates Found in Job Data');
-                                    $deleteFile = unlink(resource_path('/views/email/'.$fileName));
+                                    $deleteFile = unlink(resource_path('/views/email/' . $fileName));
                                     exit();
-                                }
-                                else
-                                {
+                                } else {
                                     $datePattern = $usDate;
                                 }
                             }
+                            /*
+                             * Date Check End
+                             */
 
-                            //GATHER SUCCESS (T)
-                            $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
-                            $successCount = count($successCollection);
+                            // Let's build up the report data.
+                            $clientData = array();
+                            foreach ($clients as $client) {
 
-                            //GATHER ERROR (f + E)
-                            $errorCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'f')->where('JobStatus', '=', 'E')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
-                            $errorCount = count($errorCollection);
+                                //GATHER SUCCESS (T)
+                                $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $successCount = count($successCollection);
 
-                            //GATHER WARNING (W)
-                            $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%'.$datePattern.'%')->get();
-                            $warningCount = count($warningCollection);
+                                //GATHER ERROR (f + E)
+                                $errorCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'f')->where('JobStatus', '=', 'E')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $errorCount = count($errorCollection);
 
-                            $clientArray = array(
-                                'id'        =>  $client->id,
-                                'name'      =>  $client->name,
-                                'success'   =>  $successCount,
-                                'error'     =>  $errorCount,
-                                'warning'   =>  $warningCount
-                            );
+                                //GATHER WARNING (W)
+                                $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $warningCount = count($warningCollection);
 
-                            array_push($clientData, $clientArray);
-                        }
+                                $clientArray = array(
+                                    'id' => $client->id,
+                                    'name' => $client->name,
+                                    'success' => $successCount,
+                                    'error' => $errorCount,
+                                    'warning' => $warningCount
+                                );
 
-                        $data = array(
-                            'clients'       =>  $clientData,
-                            'director'      =>  $director,
-                            'job'           =>  $job
-                        );
-                        $email = Mail::send('email.email'.$jobId.'', $data, function ($message) use ($data) {
-                            $message->from(Settings::getEmailFromAddress(), Settings::getEmailFromName());
-
-                            $job = $data['job'];
-                            $director = Directors::find($job->director_id);
-                            $contacts = json_decode($job->contacts);
-                            $message->subject(''.$director->director_name.' Backup Report: '.date('Y-m-d'));
-
-                            foreach($contacts as $contact)
-                            {
-                                $message->to($contact->email, $contact->name);
+                                array_push($clientData, $clientArray);
                             }
-                        });
-                        $deleteFile = unlink(resource_path('/views/email/'.$fileName));
+
+                            $data = array(
+                                'clients' => $clientData,
+                                'director' => $director,
+                                'job' => $job
+                            );
+                            $email = Mail::send('email.email' . $jobId . '', $data, function ($message) use ($data) {
+                                $message->from(Settings::getEmailFromAddress(), Settings::getEmailFromName());
+
+                                $job = $data['job'];
+                                $director = Directors::find($job->director_id);
+                                $contacts = json_decode($job->contacts);
+                                $message->subject('' . $director->director_name . ' Backup Report: ' . date('Y-m-d'));
+
+                                foreach ($contacts as $contact) {
+                                    $message->to($contact->email, $contact->name);
+                                }
+                            });
+                            $deleteFile = unlink(resource_path('/views/email/' . $fileName));
+                        }
+                    }
+                }elseif($job->report_type == Jobs::REPORT_TYPE_SEPARATE) {
+
+                    $fileName = 'email'.$jobId.'.blade.php';
+                    $code = $template->template_code;
+
+                    $blade = fopen(resource_path('/views/email/'.$fileName), 'w');
+                    if($blade !== false) {
+                        fwrite($blade, $code);
+                        $tempBlade = fclose($blade);
+
+                        if ($tempBlade === true) {
+                            /*
+                             * Detect if we are using US or UK Dates
+                             */
+                            $ukDate = date('Y-m-d');
+                            $usDate = date('Y-d-m');
+                            $datePattern = '';
+                            $ukCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%' . $ukDate . '%')->get();
+                            if (count($ukCollection) > 0) {
+                                $datePattern = $ukDate;
+                            } else {
+                                $usCollection = DB::connection($catalogName)->table('Job')->where('StartTime', 'LIKE', '%' . $usDate . '%')->get();
+
+                                if (count($usCollection) == 0) {
+                                    Log::error('No US or UK Dates Found in Job Data');
+                                    $deleteFile = unlink(resource_path('/views/email/' . $fileName));
+                                    exit();
+                                } else {
+                                    $datePattern = $usDate;
+                                }
+                            }
+                            /*
+                             * Date Check End
+                             */
+
+                            // Let's build up the report data.
+                            $clientData = array();
+                            foreach ($clients as $client) {
+
+                                //GATHER SUCCESS (T)
+                                $successCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'T')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $successCount = count($successCollection);
+
+                                //GATHER ERROR (f + E)
+                                $errorCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'f')->where('JobStatus', '=', 'E')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $errorCount = count($errorCollection);
+
+                                //GATHER WARNING (W)
+                                $warningCollection = DB::connection($catalogName)->table('Job')->where('ClientId', '=', $client->id)->where('JobStatus', '=', 'W')->where('Type', '=', 'B')->where('StartTime', 'LIKE', '%' . $datePattern . '%')->get();
+                                $warningCount = count($warningCollection);
+
+                                $clientArray = array(
+                                    'id' => $client->id,
+                                    'name' => $client->name,
+                                    'success' => $successCount,
+                                    'error' => $errorCount,
+                                    'warning' => $warningCount
+                                );
+
+                                array_push($clientData, $clientArray);
+
+                                $data = [
+                                    'clients'       => $clientData,
+                                    'director'      => $director,
+                                    'job'           => $job,
+                                    'client_name'   => $client->name,
+                                ];
+
+                                $email = Mail::send('email.email' . $jobId . '', $data, function ($message) use ($data) {
+                                    $message->from(Settings::getEmailFromAddress(), Settings::getEmailFromName());
+
+                                    $job = $data['job'];
+                                    $director = Directors::find($job->director_id);
+                                    $contacts = json_decode($job->contacts);
+                                    $message->subject('' . $director->director_name . ' Client Backup Report: '. date('d-m-Y') . ' '.$data['client_name']);
+
+                                    foreach ($contacts as $contact) {
+                                        $message->to($contact->email, $contact->name);
+                                    }
+                                });
+                            }
+
+                            $deleteFile = unlink(resource_path('/views/email/' . $fileName));
+                        }
                     }
                 }
             }
