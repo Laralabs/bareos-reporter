@@ -65,11 +65,6 @@
                             <div class="form-group{{ $errors->has('add_frequency') ? ' has-error' : '' }}">
                                 <label for="add_frequency[]">Additional Frequency:</label>
                                 <select id="add-frequency-select" class="selectpicker form-control" name="add_frequency[]" multiple>
-                                    @if($add_freqs)
-                                        <option value="-1">None</option>
-                                    @else
-                                        <option value="-1" selected>None</option>
-                                    @endif
                                     @if(!empty($add_frequencies))
                                         @foreach($add_frequencies as $add_frequency)
                                             @if($add_freqs !== false)

@@ -79,7 +79,6 @@
                                                 <option value="-1">No Options Available</option>
                                             @endif
                                     @else
-                                            <option value="-1" selected>None</option>
                                             @if(!empty($add_frequencies))
                                                 @foreach($add_frequencies as $add_frequency)
                                                     <option value="{{ $add_frequency->id }}">{{ $add_frequency->display_name }}</option>
