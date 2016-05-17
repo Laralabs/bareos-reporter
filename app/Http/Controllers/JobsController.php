@@ -91,7 +91,7 @@ class JobsController extends Controller
             $connection_name = Catalogs::getCatalogName($id);
             $clients = DB::connection($connection_name)->table('Client')->get();
         }
-        $templates = Templates::all();
+        $templates = Templates::all()->where('status', '=', 1);
         $contacts = Contacts::all();
 
         return view('jobs.add', ['director' => $director, 'schedules' => $schedules, 'clients' => $clients, 'templates' => $templates, 'contacts' => $contacts]);
@@ -192,7 +192,7 @@ class JobsController extends Controller
         $job = Jobs::find($id);
         $director = Directors::find($director);
         $schedules = Schedules::all();
-        $templates = Templates::all();
+        $templates = Templates::all()->where('status', '=', 1);
         $connection_name = Session::get('active_connection');
         $clients = '';
         if($connection_name)
