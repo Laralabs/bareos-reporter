@@ -75,6 +75,10 @@ class SchedulesController extends Controller
         $name = Input::get('name');
         $frequency = Input::get('frequency');
         $add_frequency = Input::get('add_frequency');
+        if($add_frequency == null)
+        {
+            $add_frequency = '';
+        }
         $time = Input::get('time');
 
         if($frequency == SchedulesOptions::DAILYAT)
@@ -150,6 +154,10 @@ class SchedulesController extends Controller
         $name = Input::get('name');
         $frequency = Input::get('frequency');
         $add_frequency = Input::get('add_frequency');
+        if($add_frequency == null)
+        {
+            $add_frequency = '';
+        }
         $time = Input::get('time');
 
         if($frequency == SchedulesOptions::DAILYAT)
