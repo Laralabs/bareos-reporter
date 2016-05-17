@@ -35,6 +35,8 @@ class Jobs extends Model
 
     const REPORT_TYPE_ALL       =   1;
     const REPORT_TYPE_SEPARATE  =   2;
+    const JOB_ENABLED           =   1;
+    const JOB_DISABLED          =   2;
 
     /**
      * Find job record by given id

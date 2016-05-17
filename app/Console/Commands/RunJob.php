@@ -146,7 +146,7 @@ class RunJob extends Command
                                 $job = $data['job'];
                                 $director = Directors::find($job->director_id);
                                 $contacts = json_decode($job->contacts);
-                                $message->subject('' . $director->director_name . ' Backup Report: ' . date('Y-m-d'));
+                                $message->subject('' . $director->director_name . ' Backup Report: ' . date('d-m-Y'));
 
                                 foreach ($contacts as $contact) {
                                     $message->to($contact->email, $contact->name);
