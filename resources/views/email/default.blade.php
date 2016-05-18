@@ -17,11 +17,11 @@
     <table id="report-table" class="pure-table pure-table-bordered" style="margin: 0 auto; border-collapse: collapse; border-spacing: 0; empty-cells: show; border: 1px solid #CBCBCB; border-bottom-width: 0;">
         <thead style="background-color: #E6E6E6; color: #000000; text-align: left; vertical-align: bottom">
         <tr>
-            <th style="border-left: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px;">#</th>
-            <th style="border-left: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px;">Client Name</th>
-            <th style="border-left: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #5CB85C;">Success</th>
-            <th style="border-left: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #D9534F;">Error</th>
-            <th style="border-left: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #F0AD4E;">Warning</th>
+            <th style="border-left: 1px solid #CBCBCB; border-bottom: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px;">#</th>
+            <th style="border-left: 1px solid #CBCBCB; border-bottom: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px;">Client Name</th>
+            <th style="border-left: 1px solid #CBCBCB; border-bottom: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #5CB85C;">Success</th>
+            <th style="border-left: 1px solid #CBCBCB; border-bottom: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #D9534F;">Error</th>
+            <th style="border-left: 1px solid #CBCBCB; border-bottom: 1px solid #CBCBCB; border-width: 0 0 0 1px; font-size: inherit; margin: 0; overflow: visible; padding: .5em 1em; letter-spacing: 1px; color: #F0AD4E;">Warning</th>
         </tr>
         </thead>
         <tbody>
