@@ -54,4 +54,19 @@ class Helper
 
         return $string;
     }
+
+    /**
+     * Check domain MX Records, return boolean.
+     *
+     * @param $email
+     * @return bool
+     */
+    public static function mxRecordValidation($email)
+    {
+        $domain = substr(strrchr($email, '@'), 1);
+        $mxRecords = [];
+        $mxArray = getmxrr($domain, $mxRecords);
+
+        return $mxArray;
+    }
 }

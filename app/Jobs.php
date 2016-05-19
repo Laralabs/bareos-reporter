@@ -37,6 +37,9 @@ class Jobs extends Model
     const REPORT_TYPE_SEPARATE  =   2;
     const JOB_ENABLED           =   1;
     const JOB_DISABLED          =   2;
+    const JOB_PASSED            =   1;
+    const JOB_PASSED_WARNING    =   2;
+    const JOB_FAILED            =   3;
 
     /**
      * Find job record by given id
@@ -71,6 +74,25 @@ class Jobs extends Model
         else
         {
             return false;
+        }
+    }
+
+    /**
+     * Get Client Backup Status
+     *
+     * @param $successCount
+     * @param $warningCount
+     * @param $errorCount
+     * @return int
+     */
+    public static function getClientBackupStatus($successCount, $warningCount, $errorCount)
+    {
+        if($errorCount == 0 && $warningCount == 0 && $successCount > 0) {
+            return Jobs::JOB_PASSED;
+        }elseif ($errorCount == 0 && $warningCount > 0 && $successCount > 0) {
+            return Jobs::JOB_PASSED_WARNING;
+        }elseif ($errorCount != 0){
+            return Jobs::JOB_FAILED;
         }
     }
 }

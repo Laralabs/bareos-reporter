@@ -16,6 +16,7 @@ namespace App\Console\Commands;
 use App\Catalogs;
 use App\Contacts;
 use App\Directors;
+use App\Helper;
 use App\Jobs;
 use App\Schedules;
 use App\Settings;
@@ -133,7 +134,7 @@ class RunJob extends Command
 
                                 array_push($clientData, $clientArray);
                             }
-
+                            
                             // Send Email Report
                             $data = [
                                 'clients' => $clientData,
@@ -149,7 +150,11 @@ class RunJob extends Command
                                 $message->subject('' . $director->director_name . ' Backup Report: ' . date('d-m-Y'));
 
                                 foreach ($contacts as $contact) {
-                                    $message->to($contact->email, $contact->name);
+                                    if(Helper::mxRecordValidation($contact->email) === true) {
+                                        $message->to($contact->email, $contact->name);
+                                    }else {
+                                        Log::info('MX Record Check Failed for: '.$contact->email);
+                                    }
                                 }
                             });
                             $deleteFile = unlink(resource_path('/views/email/' . $fileName));
@@ -217,11 +222,14 @@ class RunJob extends Command
 
                                 array_push($clientData, $clientArray);
 
+                                $subjectStatus = Jobs::getClientBackupStatus($successCount, $warningCount, $errorCount);
+
                                 $data = [
-                                    'clients'       => $clientData,
-                                    'director'      => $director,
-                                    'job'           => $job,
-                                    'client_name'   => $client->name,
+                                    'clients'           => $clientData,
+                                    'director'          => $director,
+                                    'job'               => $job,
+                                    'client_name'       => $client->name,
+                                    'subject_status'    => $subjectStatus,
                                 ];
 
                                 $email = Mail::send('email.email' . $jobId . '', $data, function ($message) use ($data) {
@@ -230,7 +238,16 @@ class RunJob extends Command
                                     $job = $data['job'];
                                     $director = Directors::find($job->director_id);
                                     $contacts = json_decode($job->contacts);
-                                    $message->subject('' . $director->director_name . ' Client Backup Report: ' . $data['client_name'].' '.date('d-m-Y'));
+
+                                    if($data['subject_status'] == Jobs::JOB_PASSED){
+                                        $message->subject('' . $data['client_name'] . ' Backup Report: Passed');
+                                    }elseif($data['subject_status'] == Jobs::JOB_PASSED_WARNING){
+                                        $message->subject('' . $data['client_name'] . ' Backup Report: Passed with Warnings');
+                                    }elseif($data['subject_status'] == Jobs::JOB_FAILED){
+                                        $message->subject('' . $data['client_name'] . ' Backup Report: Failed');
+                                    }else{
+                                        $message->subject('' . $director->director_name . ' Client Backup Report: ' . $data['client_name'].' '.date('d-m-Y'));
+                                    }
 
                                     foreach ($contacts as $contact) {
                                         $message->to($contact->email, $contact->name);
