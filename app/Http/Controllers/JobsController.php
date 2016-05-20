@@ -18,6 +18,7 @@ use App\Contacts;
 use App\Directors;
 use App\Jobs;
 use App\Schedules;
+use App\Statistics;
 use App\Templates;
 use Illuminate\Http\Request;
 
@@ -172,6 +173,8 @@ class JobsController extends Controller
                 'template_id'   =>  $template,
                 'contacts'      =>  $contacts
             ));
+
+            Statistics::jobIncrement();
 
             return redirect($redirectUrl)->with('success', 'Job created successfully');
         }catch(Exception $e)
@@ -338,6 +341,8 @@ class JobsController extends Controller
         try {
             $job->save();
 
+            Statistics::jobIncrement();
+
             return redirect($redirectUrl)->with('success', 'Job saved successfully');
         }catch(Exception $e)
         {
@@ -359,6 +364,8 @@ class JobsController extends Controller
 
         try {
             $job->delete();
+
+            Statistics::jobDecrement();
 
             return redirect($redirectUrl)->with('success', 'Job deleted successfully');
         }catch(Exception $e)

@@ -20,6 +20,7 @@ use App\Helper;
 use App\Jobs;
 use App\Schedules;
 use App\Settings;
+use App\Statistics;
 use App\Templates;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -157,6 +158,13 @@ class RunJob extends Command
                                     }
                                 }
                             });
+
+                            if(count(Mail::failures()) > 0){
+                                Log::error('Failed to send email for Job ID: '.$jobId);
+                            }else{
+                                Statistics::emailIncrement();
+                            }
+                            
                             $deleteFile = unlink(resource_path('/views/email/' . $fileName));
                         }
                     }
@@ -253,6 +261,12 @@ class RunJob extends Command
                                         $message->to($contact->email, $contact->name);
                                     }
                                 });
+
+                                if(count(Mail::failures()) > 0){
+                                    Log::error('Failed to send email for Job ID: '.$jobId);
+                                }else{
+                                    Statistics::emailIncrement();
+                                }
                             }
 
                             $deleteFile = unlink(resource_path('/views/email/' . $fileName));
