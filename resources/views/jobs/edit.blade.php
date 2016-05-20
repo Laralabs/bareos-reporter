@@ -18,10 +18,6 @@
 @endsection
 
 @section('content')
-    <?php
-            $jobClients = json_decode($job->clients);
-            $jobContacts = json_decode($job->contacts);
-    ?>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -115,7 +111,6 @@
                                         <option value="-1">No Options Available</option>
                                     @endif
                                     @if(!empty($jobClients))
-                                        <option value="-1">None</option>
                                         @foreach($jobClients as $jobClient)
                                             <option value="{{ $jobClient->id }}" selected>{{ $jobClient->name }}</option>
                                         @endforeach
@@ -153,13 +148,16 @@
                                 <select id="contacts-select" class="selectpicker form-control" name="contacts[]" data-live-search="true" multiple>
                                     @if(!empty($contacts))
                                         @foreach($contacts as $contact)
-                                            <option value="{{ $contact->id }}">{{ $contact->name }} ({{ $contact->email }})</option>
+                                            @if(!empty($selectedContacts))
+                                                @if(in_array($contact->id, $selectedContacts))
+                                                    <option value="{{ $contact->id }}" selected="selected">{{ $contact->name }} ({{ $contact->email }})</option>
+                                                @else
+                                                    <option value="{{ $contact->id }}">{{ $contact->name }} ({{ $contact->email }})</option>
+                                                @endif
+                                            @else
+                                                <option value="{{ $contact->id }}">{{ $contact->name }} ({{ $contact->email }})</option>
+                                            @endif
                                         @endforeach
-                                        @if(!empty($jobContacts))
-                                            @foreach($jobContacts as $jobContact)
-                                                <option value="{{ $jobContact->id }}" selected="selected">{{ $jobContact->name }} ({{ $jobContact->email }})</option>
-                                            @endforeach
-                                        @endif
                                     @else
                                         <option value="-1">No Options Available</option>
                                     @endif
@@ -195,7 +193,7 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
+                        <script type="text/javascript">
                             (function($){
                                 $(document).ready(function(){
                                     $('#confirm-job-delete').on('click', '.btn-ok', function(e) {

@@ -224,12 +224,17 @@ class JobsController extends Controller
         $clients = $clients->get();
         $contacts = Contacts::all();
         $jobContacts = json_decode($job->contacts);
-        foreach($jobContacts as $jobContact)
-        {
-            $contacts = $contacts->where('id', '!=', $jobContact->id);
+        $jobClients = json_decode($job->clients);
+
+        if(!empty($jobContacts)) {
+            $selectedContacts = [];
+            foreach($jobContacts as $jobContact)
+            {
+                $selectedContacts[] = $jobContact->id;
+            }
         }
 
-        return view('jobs.edit', ['job' => $job, 'director' => $director, 'schedules' => $schedules, 'clients' => $clients, 'templates' => $templates, 'contacts' => $contacts]);
+        return view('jobs.edit', ['job' => $job, 'director' => $director, 'schedules' => $schedules, 'clients' => $clients, 'templates' => $templates, 'contacts' => $contacts, 'selectedContacts' => $selectedContacts, 'jobClients' => $jobClients]);
     }
 
     /**
