@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Commands\Inspire::class,
         Commands\RegisterJobs::class,
-        Commands\RunJob::class
+        Commands\RunJob::class,
+        Commands\ValidateContacts::class,
     ];
 
     /**

@@ -65,7 +65,12 @@ class Helper
     {
         $domain = substr(strrchr($email, '@'), 1);
         $mxRecords = [];
-        $mxArray = getmxrr($domain, $mxRecords);
+
+        if($domain){
+            $mxArray = getmxrr($domain, $mxRecords);
+        }else{
+            return false;
+        }
 
         return $mxArray;
     }

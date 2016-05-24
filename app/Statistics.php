@@ -34,6 +34,23 @@ class Statistics extends Model
     ];
 
     /**
+     * Return statistics record
+     *
+     * @return mixed
+     */
+    public static function getStatistics()
+    {
+        $statistics = Statistics::all()->first();
+
+        if($statistics == null)
+        {
+            $statistics = new Statistics();
+        }
+
+        return $statistics;
+    }
+
+    /**
      * Increment job_count by one
      *
      */
@@ -222,6 +239,43 @@ class Statistics extends Model
                 'invalid_contacts'  => 0,
                 'invalid_catalogs'  => 0
             ]);
+        }
+    }
+
+    /**
+     * Get the Invalid Contacts count
+     *
+     * @return integer
+     * @return null
+     */
+    public static function getInvalidContactCount()
+    {
+        $statistic = Statistics::all()->first();
+
+        if($statistic)
+        {
+            return $statistic->invalid_contacts;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * Counts invalid contacts and updates statistic
+     *
+     */
+    public static function updateInvalidContactCount()
+    {
+        $contacts = Contacts::all()->where('valid', Contacts::INVALID);
+        $setting = Statistics::getStatistics();
+
+        if($contacts)
+        {
+            $contactCount = $contacts->count();
+            $setting->invalid_contacts = $contactCount;
+            $setting->save();
         }
     }
 }

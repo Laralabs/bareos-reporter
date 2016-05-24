@@ -65,6 +65,12 @@ class RegisterJobs extends Command
         $jobs = Jobs::all();
         $commandName = 'reporter:run';
 
+        /**
+         * Define non job schedules
+         */
+        // Cycles through contacts and validates the MX Records
+        $this->schedule->command('reporter:mxvalidate')->hourly();
+
         foreach($jobs as $job) {
             if ($job->status == Jobs::JOB_ENABLED) {
                 $schedule_record = Schedules::find($job->schedule_id);

@@ -14,10 +14,10 @@ class CreateStatisticsTable extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('job_count');
-            $table->string('emails_sent');
-            $table->string('invalid_contacts');
-            $table->string('invalid_catalogs');
+            $table->integer('job_count')->default(0)->unsigned();
+            $table->integer('emails_sent')->default(0)->unsigned();
+            $table->integer('invalid_contacts')->default(0)->unsigned();
+            $table->integer('invalid_catalogs')->default(0)->unsigned();
             $table->timestamps();
         });
     }

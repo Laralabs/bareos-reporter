@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mobile');
+            $table->boolean('valid')->unsigned();
             $table->timestamps();
         });
     }

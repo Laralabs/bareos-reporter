@@ -30,8 +30,11 @@ class Contacts extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'mobile'
+        'name', 'email', 'mobile', 'valid'
     ];
+
+    const INVALID = 0;
+    const VALID = 1;
 
     /**
      * Find contact record by given id
