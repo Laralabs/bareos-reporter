@@ -91,7 +91,7 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $statistic->increment('email_count');
+            $statistic->increment('emails_sent');
             $statistic->save();
         }
         else
@@ -115,7 +115,7 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $statistic->decrement('email_count');
+            $statistic->decrement('emails_sent');
             $statistic->save();
         }
         else
