@@ -43,17 +43,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $jobCount = $statistic->job_count;
-            $statistic->job_count = $jobCount++;
+            $statistic->increment('job_count');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
                 'job_count'         => 1,
-                'emails_sent'       => '',
-                'invalid_contacts'  => '',
-                'invalid_catalogs'  => ''
+                'emails_sent'       => 0,
+                'invalid_contacts'  => 0,
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -68,17 +67,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $jobCount = $statistic->job_count;
-            $statistic->job_count = $jobCount--;
+            $statistic->decrement('job_count');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
                 'job_count'         => 0,
-                'emails_sent'       => '',
-                'invalid_contacts'  => '',
-                'invalid_catalogs'  => ''
+                'emails_sent'       => 0,
+                'invalid_contacts'  => 0,
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -93,17 +91,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $emailsSent = $statistic->emails_sent;
-            $statistic->emails_sent = $emailsSent++;
+            $statistic->increment('email_count');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
+                'job_count'         => 0,
                 'emails_sent'       => 1,
-                'invalid_contacts'  => '',
-                'invalid_catalogs'  => ''
+                'invalid_contacts'  => 0,
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -118,17 +115,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $emailsSent = $statistic->emails_sent;
-            $statistic->emails_sent = $emailsSent--;
+            $statistic->decrement('email_count');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
+                'job_count'         => 0,
                 'emails_sent'       => 0,
-                'invalid_contacts'  => '',
-                'invalid_catalogs'  => ''
+                'invalid_contacts'  => 0,
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -143,17 +139,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $invalidContacts = $statistic->invalid_contacts;
-            $statistic->invalid_contacts = $invalidContacts++;
+            $statistic->increment('invalid_contacts');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
-                'emails_sent'       => '',
+                'job_count'         => 0,
+                'emails_sent'       => 0,
                 'invalid_contacts'  => 1,
-                'invalid_catalogs'  => ''
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -168,17 +163,16 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $invalidContacts = $statistic->invalid_contacts;
-            $statistic->invalid_contacts = $invalidContacts--;
+            $statistic->decrement('invalid_contacts');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
-                'emails_sent'       => '',
+                'job_count'         => 0,
+                'emails_sent'       => 0,
                 'invalid_contacts'  => 0,
-                'invalid_catalogs'  => ''
+                'invalid_catalogs'  => 0
             ]);
         }
     }
@@ -193,16 +187,15 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $invalidCatalogs = $statistic->invalid_catalogs;
-            $statistic->invalid_catalogs = $invalidCatalogs++;
+            $statistic->increment('invalid_catalogs');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
-                'emails_sent'       => '',
-                'invalid_contacts'  => '',
+                'job_count'         => 0,
+                'emails_sent'       => 0,
+                'invalid_contacts'  => 0,
                 'invalid_catalogs'  => 1
             ]);
         }
@@ -218,16 +211,15 @@ class Statistics extends Model
 
         if($statistic)
         {
-            $invalidCatalogs = $statistic->invalid_catalogs;
-            $statistic->invalid_catalogs = $invalidCatalogs--;
+            $statistic->decrement('invalid_catalogs');
             $statistic->save();
         }
         else
         {
             $statistic = Statistics::create([
-                'job_count'         => '',
-                'emails_sent'       => '',
-                'invalid_contacts'  => '',
+                'job_count'         => 0,
+                'emails_sent'       => 0,
+                'invalid_contacts'  => 0,
                 'invalid_catalogs'  => 0
             ]);
         }

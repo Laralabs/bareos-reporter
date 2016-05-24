@@ -341,8 +341,6 @@ class JobsController extends Controller
         try {
             $job->save();
 
-            Statistics::jobIncrement();
-
             return redirect($redirectUrl)->with('success', 'Job saved successfully');
         }catch(Exception $e)
         {
