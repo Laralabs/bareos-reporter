@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\RegisterJobs::class,
         Commands\RunJob::class,
         Commands\ValidateContacts::class,
+        Commands\ValidateCatalogs::class,
     ];
 
     /**

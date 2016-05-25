@@ -14,6 +14,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class Statistics extends Model
 {
@@ -275,7 +277,33 @@ class Statistics extends Model
         {
             $contactCount = $contacts->count();
             $setting->invalid_contacts = $contactCount;
-            $setting->save();
+            try{
+                $setting->save();
+            }catch (Exception $e){
+                $error = $e->getMessage();
+                Log::error('updateInvalidContactCount() ERROR: .'.$error);
+            }
+        }
+    }
+
+    /**
+     * Counts invalid catalogs and updates statistic
+     *
+     */
+    public static function updateInvalidCatalogCount()
+    {
+        $catalogs = Catalogs::all()->where('status', Catalogs::FAILED);
+        $setting = Statistics::getStatistics();
+
+        if($catalogs){
+            $catalogCount = $catalogs->count();
+            $setting->invalid_catalogs = $catalogCount;
+            try{
+                $setting->save();
+            }catch (Exception $e){
+                $error = $e->getMessage();
+                Log::error('updateInvalidCatalogCount() ERROR: .'.$error);
+            }
         }
     }
 }

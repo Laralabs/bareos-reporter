@@ -69,7 +69,9 @@ class RegisterJobs extends Command
          * Define non job schedules
          */
         // Cycles through contacts and validates the MX Records
-        $this->schedule->command('reporter:mxvalidate')->hourly();
+        $this->schedule->command('reporter:validate:mx')->hourly();
+        // Cycles through directors and validates their catalog connections
+        $this->schedule->command('reporter:validate:catalogs')->hourly();
 
         foreach($jobs as $job) {
             if ($job->status == Jobs::JOB_ENABLED) {
