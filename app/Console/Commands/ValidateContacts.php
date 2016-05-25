@@ -27,7 +27,7 @@ class ValidateContacts extends Command
      *
      * @var string
      */
-    protected $signature = 'reporter:mxvalidate';
+    protected $signature = 'reporter:validate:mx';
 
     /**
      * The console command description.
