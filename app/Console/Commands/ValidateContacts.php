@@ -55,41 +55,45 @@ class ValidateContacts extends Command
     {
         $contacts = Contacts::all();
 
-        foreach ($contacts as $contact) {
+        if($contacts) {
+            foreach ($contacts as $contact) {
 
-            $contactEmail = $contact->email;
-            $contactValid = $contact->valid;
+                $contactEmail = $contact->email;
+                $contactValid = $contact->valid;
 
-            $validate = Helper::mxRecordValidation($contactEmail);
+                $validate = Helper::mxRecordValidation($contactEmail);
 
-            if($validate === false) {
-                try{
-                    $contact->valid = Contacts::INVALID;
-                    $contact->save();
-                    Log::info('Invalid Email for Contact: '.$contact->name);
-                }catch (Exception $e){
-                    Log::info('Unable to save contact. Invalid Email for Contact: '.$contact->name);
-                }
-            }elseif($validate === true) {
-
-                if($contactValid == Contacts::INVALID){
+                if($validate === false) {
                     try{
-                        $contact->valid = Contacts::VALID;
+                        $contact->valid = Contacts::INVALID;
                         $contact->save();
+                        Log::info('Invalid Email for Contact: '.$contact->name);
                     }catch (Exception $e){
-                        Log::info('Unable to save contact: '.$contact->name);
+                        Log::info('Unable to save contact. Invalid Email for Contact: '.$contact->name);
                     }
-                }else{
-                    try{
-                        $contact->valid = Contacts::VALID;
-                        $contact->save();
-                    }catch (Exception $e){
-                        Log::info('Unable to save contact: '.$contact->name);
+                }elseif($validate === true) {
+
+                    if($contactValid == Contacts::INVALID){
+                        try{
+                            $contact->valid = Contacts::VALID;
+                            $contact->save();
+                        }catch (Exception $e){
+                            Log::info('Unable to save contact: '.$contact->name);
+                        }
+                    }else{
+                        try{
+                            $contact->valid = Contacts::VALID;
+                            $contact->save();
+                        }catch (Exception $e){
+                            Log::info('Unable to save contact: '.$contact->name);
+                        }
                     }
                 }
             }
 
             Statistics::updateInvalidContactCount();
+        }else{
+            Log::error('Validate Contacts Artisan Command Failed');
         }
     }
 }
