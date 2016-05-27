@@ -13,19 +13,19 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>{{ $director->director_name }} Clients / Bareos Reporter</title>
+@section('head-title')
+    {{ $director->director_name }} Clients / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1>{{ $director->director_name }} Clients</h1>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">{{ $director->director_name }} Clients</h3>
-                </div>
-
-                <div class="panel-body">
+            <div class="box box-primary">
+                <div class="box-body">
                     <div class="clients-wrap">
                         <table id="clients-table" class="table table-bordered">
                             <thead>

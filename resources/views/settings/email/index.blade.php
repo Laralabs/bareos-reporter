@@ -13,8 +13,12 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>Edit Email Settings / Bareos Reporter</title>
+@section('head-title')
+    Edit Email Settings / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1>Edit Email Settings</h1>
 @endsection
 
 @section('content')
@@ -36,13 +40,9 @@
     ?>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Email Settings</h3>
-                </div>
-
-                <div class="panel-body">
-                    <div class="col-xs-6 col-md-4 col-lg-4">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <form class="form-edit-user" role="form" method="POST" action="/settings/email/update">
                             {!! csrf_field() !!}
                             <div class="form-group{{ $errors->has('email_from_address') ? ' has-error' : '' }}">
@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-flat btn-primary"><strong>Update</strong></button>
                             </div>
                         </form>
                     </div>

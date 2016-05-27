@@ -13,24 +13,24 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>Add Director / Bareos Reporter</title>
+@section('head-title')
+    Add Director / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1>Add Director</h1>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Add Director</h3>
-                </div>
-
-                <div class="panel-body">
+            <div class="box box-primary">
+                <div class="box-body">
                     <form class="form-add-director" method="POST" action="/directors/create">
                         {!! csrf_field() !!}
-                        <div class="col-xs-4">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <div class="section-heading">
-                                <h4>Bareos Director Details</h4>
+                                <h4 style="margin-bottom: 0;">Bareos Director Details</h4>
                                 <hr />
                             </div>
                             <div class="form-group{{ $errors->has('director_name') ? ' has-error' : '' }}">
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="section-heading" style="margin-top: 25px;">
-                                <h4>Catalog Details</h4>
+                                <h4 style="margin-bottom: 0;">Catalog Details</h4>
                                 <hr />
                             </div>
                             <div class="form-group{{ $errors->has('catalog_name') ? ' has-error' : '' }}">
@@ -77,7 +77,7 @@
                             <div class="form-group{{ $errors->has('driver') ? ' has-error' : '' }}">
                                 <?php $databaseDriver = old('driver'); ?>
                                 <label for="driver">Database Driver:</label>
-                                <select id="driver-select" class="selectpicker form-control" name="driver">
+                                <select id="driver-select" class="select2-driver form-control" name="driver">
                                     @if($databaseDriver == 'mysql')
                                         <option value="mysql" selected="selected">MySQL</option>
                                     @else
@@ -345,8 +345,8 @@
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Save</button>
-                                <button type="submit" class="btn btn-info" disabled><i class="fa fa-btn fa-sign-in"></i>Test Connection</button>
+                                <button type="submit" class="btn btn-flat btn-primary" style="margin-right: 10px;"><strong>Save</strong></button>
+                                <button type="submit" class="btn btn-flat btn-info" disabled><strong><i class="fa fa-btn fa-sign-in"></i> Test Connection</strong></button>
                             </div>
                         </div>
                     </form>

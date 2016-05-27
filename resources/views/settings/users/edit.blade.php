@@ -13,20 +13,23 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>Edit User / Bareos Reporter</title>
+@section('head-title')
+    Edit User / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1>Edit User</h1>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Edit User</h3>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ $user->name }}</h3>
                 </div>
-
-                <div class="panel-body">
-                    <div class="col-xs-6 col-md-4 col-lg-4">
+                <div class="box-body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <form class="form-edit-user" role="form" method="POST" action="/settings/users/save/{{ $user->id }}">
                             {!! csrf_field() !!}
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -75,11 +78,11 @@
                                 @endif
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-flat btn-primary"><strong>Save</strong></button>
                             </div>
                         </form>
                         <div class="form-group" style="margin-top: 15px;">
-                            <button class="btn btn-danger" data-record-id="{{ $user->id }}" data-record-title="{{ $user->name }}" data-toggle="modal" data-target="#confirm-user-delete">Delete</button>
+                            <button class="btn btn-flat btn-danger" data-record-id="{{ $user->id }}" data-record-title="{{ $user->name }}" data-toggle="modal" data-target="#confirm-user-delete"><strong>Delete</strong></button>
                         </div>
                         <div class="modal fade" id="confirm-user-delete" tabindex="-1" role="dialog" aria-labelledby="userDelete" aria-hidden="true">
                             <div class="modal-dialog">
@@ -93,8 +96,8 @@
                                         <p>Do you want to proceed?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger btn-ok">Delete</button>
+                                        <button type="button" class="btn btn-flat btn-default" data-dismiss="modal"><strong>Cancel</strong></button>
+                                        <button type="button" class="btn btn-flat btn-danger btn-ok"><strong>Delete</strong></button>
                                     </div>
                                 </div>
                             </div>

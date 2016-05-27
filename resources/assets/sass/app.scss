@@ -1,5 +1,6 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
 /* Typography */
 
 @font-face {
@@ -123,516 +124,196 @@
 }
 
 body {
-  font-family: 'source_sans_proregular';
+  font-family: 'source_sans_proregular' !important;
 }
 
-h1 {
-  font-family: 'karlabold';
-}
-
-h2 {
-  font-family: 'karlabold';
-}
-
-h3 {
-  font-family: 'karlabold';
-}
-
-h4 {
-  font-family: 'karlabold';
-}
-
-.main-logo-wrap {
-
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  .row {
-
-    div {
-
-      text-align: center;
-
-      img {
-        width: 400px;
-        max-width: 100%;
-      }
-    }
-  }
-}
-
-
-/* Globals */
-
-.clear {
-  clear: both;
-}
-
-hr {
-  margin-top: 10px !important;
-}
-
-.btn {
+button {
   letter-spacing: 1px !important;
 }
 
-.form-add-director {
-
-  div[class*="col-"] {
-    padding: 0 !important;
-  }
-}
-
 .label {
-  font-size: 100% !important;
-  letter-spacing: 1px;
+  font-size: 95% !important;
 }
 
-.clearfix {
-  clear: both;
-}
-
-.inline-select {
-  width: auto !important;
-  margin-left: 5px !important;
-}
-
-.director-select-row {
-  margin-bottom: 17px !important;
-
-  .director-select-label-wrap {
-    float: left;
-    padding: 6px 5px 4px 0;
-    display: inline-block;
-
-    .director-select-label {
-      font-family: "karlabold" !important;
-      font-size: 18px;
-      font-weight: normal !important;
-      color: #555555 !important;
-    }
+@media screen and (min-width: 300px) {
+  .bareos-logo {
+    max-width: 100%;
   }
 
-  .director-select-wrap {
-    float: left;
-    display: inline-block;
-  }
-}
-
-.dt-bootstrap {
-  .row {
-    .col-sm-5 {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    .col-sm-6 {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    .col-sm-7 {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    .col-sm-12 {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-  }
-}
-.panel-body {
-  .col-sm-5 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .col-sm-6 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .col-sm-7 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .col-sm-12 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .col-xs-4 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
-/* Globals End */
-
-//SIDEBAR
-
-body,html{
-  height: 100%;
-}
-
-.navbar-brand-wrap {
-
-  border-bottom: 1px solid #DDDDDD;
-
-  .logo-wrap {
-    float: left;
-
-    .navbar-brand {
-      line-height: 26px !important;
-    }
-
-    .bareos-logo {
-      float: left;
-      display: inline;
-      padding: 10px 0 10px 6px;
-    }
-
-    .app-name {
-      font-family: "karlabold" !important;
-      font-size: 22px;
-      //color: #636B71;
-      color: #555555;
-      display: inline;
-      padding: 20px 0 0 5px;
-      text-decoration: none;
-      width: 55% !important;
-      float: left;
-      text-align: left !important;
-      text-transform: uppercase;
-    }
+  h1, h2, h3, h4 {
+    font-family: 'karlaregular' !important;
   }
 
-  .mobile-nav-toggle {
-    float: right;
-
-    .navbar-toggle {
-      margin-top: 15px !important;
-    }
-  }
-}
-
-nav.sidebar, .main{
-  -webkit-transition: margin 200ms ease-out;
-  -moz-transition: margin 200ms ease-out;
-  -o-transition: margin 200ms ease-out;
-  transition: margin 200ms ease-out;
-}
-
-.navbar-default {
-  background-color: #FFFFFF !important;
-  border-color: #DDDDDD !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  border-radius: 0 !important;
-}
-
-.navbar-nav > li > a {
-  color: #555555;
-  letter-spacing: 1px;
-  padding-left: 15px;
-}
-.navbar-default .navbar-nav > li > a {
-  color: #555555;
-}
-
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #222222;
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #FDFDFD !important;
-  border-right: 1px solid #DDDDDD;
-}
-
-.main{
-  padding: 10px 10px 0 10px;
-}
-
-@media (max-width: 764px) {
-  .dropdown-menu {
-    background-color: #F3F5F8;
+  .app-name {
+    font-family: "karlabold" !important;
+    font-size: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
   }
 
-  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: transparent !important;
-  }
-
-  .navbar-nav > li > .dropdown-menu {
-    border-radius: 0 !important;
-  }
-
-  nav.sidebar .navbar-nav .open .dropdown-menu {
-    background-color: #F3F5F8 !important;
-  }
-
-  .small-nav {
-    display: none !important;
-  }
-
-  /* Directors Section */
-  .add-button {
-    margin-bottom: 15px;
-  }
-}
-@media (min-width: 765px) {
-
-  .main{
-    position: absolute;
-    width: calc(100% - 40px);
-    margin-left: 40px;
-    float: right;
-  }
-
-  .navback {
-    position: fixed;
-    top: 0;
-    bottom: -120px;
-    z-index: 1;
+  .auth-footer {
     background-color: #FFFFFF;
-    border-right: 1px #DDDDDD solid;
-    width: 200px;
+    padding: 15px;
+    color: #444444;
+    border-top: 1px solid #D2D6DE;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 
-  .navtop {
+  .message-container {
     position: relative;
-    float: left;
-    z-index: 9999;
-    width: 200px;
+    padding: 15px 15px 0 15px;
+  }
+
+  .bootstrap-select {
+    button {
+      background-color: transparent !important;
+      border-radius: 0 !important;
+      border: 1px solid #D2D6DE !important;
+      padding: 6px 12px !important;
+    }
   }
 
   .dropdown-menu {
-    width: 199px;
-    border-right: 1px solid #DDDDDD !important;
-  }
-
-  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: transparent !important;
-  }
-
-  .navbar-nav > li > .dropdown-menu {
+    background-color: #FFFFFF;
     border-radius: 0 !important;
-  }
-
-  nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: #5A5A5A;
-  }
-
-  nav.sidebar:hover + .main{
-    margin-left: 200px;
-  }
-
-  nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-    margin-left: 0px;
-  }
-
-  nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
-    text-align: center;
-    width: 100%;
-    margin-left: 0px;
-  }
-
-  nav.sidebar a{
-    padding-right: 19px;
-  }
-
-  nav.sidebar .navbar-nav > li:first-child{
-    //border-top: 1px #e5e5e5 solid;
-  }
-
-  nav.sidebar .navbar-nav > li{
-    border-bottom: 1px #DDDDDD solid;
+    border: 1px solid #CCCCCC !important;
+    border-top: 0 !important;
     border-right: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    .inner {
+      border: 0 !important;
+    }
+
+    li {
+
+      color: #333333;
+
+      a {
+        padding: 3px 10px !important;
+        color: #333333 !important;
+      }
+
+      li.selected {
+        background-color: #DDDDDD !important;
+      }
+
+      a:hover {
+        background-color: #3C8DBC !important;
+        color: #FFFFFF !important;
+      }
+    }
   }
 
-  nav.sidebar .navbar-nav .open .dropdown-menu {
-    position: static;
-    float: none;
-    width: auto;
-    margin-top: 0;
-    background-color: #F3F5F8 !important;
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  .section-heading {
+
+    h4 {
+      margin-bottom: 0 !important;
+    }
+
+    hr {
+      margin-top: 10px !important;
+    }
   }
 
-  nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
-    padding: 0 0px 0 0px;
+  .btn-group.open .dropdown-toggle {
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0) !important;
   }
 
-  .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-    color: #777;
+  .clearfix {
+    clear: both;
   }
 
-  nav.sidebar{
-    width: 200px;
-    height: 100vh;
-    margin-left: -147px;
-    float: left;
-    margin-bottom: 0px;
+  .inline-select {
+    width: auto !important;
+    margin-left: 5px !important;
+  }
 
-    .navtop {
+  .skin-black .main-header > .navbar .nav > li > a:hover, .skin-black .main-header > .navbar .nav .open > a:hover {
+    background: #3C8DBC !important;
+    color: #FFFFFF !important;
+  }
 
-      .navbar-brand-wrap {
+  .skin-black .main-header > .navbar .nav > li > a:active, .skin-black .main-header > .navbar .nav > li > a:focus, .skin-black .main-header > .navbar .nav .open > a, .skin-black .main-header > .navbar .nav .open > a:focus, .skin-black .main-header > .navbar .nav > .active > a {
+    background: #357CA5 !important;
+    color: #FFFFFF !important;
+  }
 
-        .logo-wrap {
+  .director-select-wrapper {
 
-          float: right;
+    position: relative;
+    top: -5%;
+    padding-top: 3%;
+    padding-right: 15px;
 
-          .navbar-brand-app-name {
-            display: none;
-          }
+    #director-select-form {
 
-          .bareos-logo {
-            float: right;
+      .director-select-label-wrap {
+        padding: 6px 5px 4px 0;
+        display: inline-block;
 
-            img {
-              max-width: 100%;
-            }
+        label {
+          display: inline !important;
+          margin: 0 !important;
+        }
+      }
+
+      .director-select-wrap {
+        display: inline-block;
+
+        .bootstrap-select {
+
+          button {
+
+            width: 120px;
           }
         }
       }
     }
-
-    .small-nav {
-      display: inline;
-      float: right;
-    }
   }
+}
 
-  nav.sidebar li {
-    width: 100%;
-  }
+@media screen and (min-width: 410px) {
 
-  nav.sidebar:hover{
-    margin-left: 0px;
+  .director-select-wrapper {
 
-    .navtop {
+    padding-top: 3%;
+    padding-right: 15px;
 
-      .navbar-brand-wrap {
+    #director-select-form {
 
-        .logo-wrap {
+      .director-select-label-wrap {
+        padding: 6px 5px 4px 0;
+        display: inline-block;
 
-          float: left;
+        label {
+          display: inline !important;
+          margin: 0 !important;
+        }
+      }
 
-          .navbar-brand-app-name {
-            display: inline;
-          }
+      .director-select-wrap {
+        display: inline-block;
 
-          .bareos-logo {
-            float: left;
+        .bootstrap-select {
 
-            img {
-              max-width: 100%;
-            }
+          button {
+
+            width: 150px;
           }
         }
       }
     }
-
-    .small-nav {
-      display: none;
-    }
-  }
-
-  /* Content Containers */
-
-  .content-container {
-    padding-left: 53px;
-    padding-top: 15px;
-    width: 100% !important;
-
-    .row {
-      float: left;
-      width: 100%;
-      margin: 0 0 15px 0 !important;
-    }
-
-    .col-md-12 {
-      float: left;
-      width: 100%;
-    }
-  }
-
-  nav.sidebar:hover + .content-container {
-      padding-left: 200px;
-  }
-
-  .forAnimate{
-    opacity: 0;
-  }
-
-  /* Directors Section */
-  .add-button {
-    margin-bottom: 15px;
   }
 }
 
-@media (min-width: 1330px) {
+@media screen and (min-width: 767px) {
 
-  .main{
-    width: calc(100% - 200px);
-    margin-left: 200px;
+  .app-name {
+    color: #555555;
   }
-
-  nav.sidebar{
-    margin-left: 0px;
-    float: left;
-
-    .navtop {
-
-      .navbar-brand-wrap {
-
-        .logo-wrap {
-
-          float: left;
-
-          .navbar-brand-app-name {
-            display: inline;
-          }
-
-          .bareos-logo {
-            float: left;
-
-            img {
-              max-width: 100%;
-            }
-          }
-        }
-      }
-    }
-
-    .small-nav {
-      display: none;
-      float: right;
-    }
-  }
-
-  nav.sidebar .forAnimate{
-    opacity: 1;
-  }
-
-  /* Content Containers */
-
-  .content-container {
-    padding-left: 200px;
-    padding-top: 15px;
-    width: 100% !important;
-
-    .row {
-      float: left;
-      width: 100%;
-      margin: 0 0 15px 0 !important;
-    }
-  }
-}
-
-nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
-  color: #5A5A5A;
-}
-
-nav:hover .forAnimate{
-  opacity: 1;
-}
-section{
-  padding-left: 15px;
 }

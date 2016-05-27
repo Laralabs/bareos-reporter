@@ -14,6 +14,7 @@
 namespace App\Http\Controllers;
 
 use App\Catalogs;
+use App\Statistics;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,16 +31,6 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('dashboard.index');
     }
 
     /**
@@ -65,5 +56,17 @@ class DashboardController extends Controller
         {
             return redirect('directors')->with('error', 'Unable to change director');
         }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $statistics = Statistics::all()->first();
+
+        return view('dashboard.index', ['statistics' => $statistics]);
     }
 }

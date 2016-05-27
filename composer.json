@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "laralabs/connection-loader": "~1.0.0"
+        "laralabs/connection-loader": "~1.0.0",
+        "almasaeed2010/adminlte": "~2.3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

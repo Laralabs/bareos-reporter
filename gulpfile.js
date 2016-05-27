@@ -20,6 +20,10 @@ elixir(function(mix) {
     mix.sass('font-awesome.scss');
     mix.copy('node_modules/font-awesome/fonts', 'public/fonts');
 
+    /* ION Icons CSS and Fonts */
+    mix.sass('./node_modules/ionicons/scss/ionicons.scss');
+    mix.copy('node_modules/ionicons/fonts', 'public/fonts');
+
     /* Glyphicons */
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/bootstrap');
 
@@ -30,9 +34,13 @@ elixir(function(mix) {
     mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.js', 'public/js');
 
     /* Bootstrap Select, Dropdown Replacement */
-
     mix.copy('node_modules/bootstrap-select/dist/css/bootstrap-select.css', 'public/css');
     mix.copy('node_modules/bootstrap-select/js/bootstrap-select.js', 'public/js');
+    
+    /* AdminLTE by Almsaeed Studio */
+    mix.less('./vendor/almasaeed2010/adminlte/build/less/AdminLTE.less');
+    mix.less('./vendor/almasaeed2010/adminlte/build/less/skins/skin-black.less');
+    mix.copy('./vendor/almasaeed2010/adminlte/dist/js/app.js', 'public/js/adminlte.js');
 
     /* DataTables Tasks */
     elixir(function(mix) {

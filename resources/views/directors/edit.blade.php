@@ -13,9 +13,14 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>Edit {{ $director->director_name }} / Bareos Reporter</title>
+@section('head-title')
+    Edit Director / Bareos Reporter
 @endsection
+
+@section('content-header')
+    <h1>Edit Director</h1>
+@endsection
+
 <?php
         $enc_password = $catalog->password;
         if(!empty($enc_password))
@@ -26,13 +31,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Edit {{ $director->director_name }}</h3>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ $director->director_name }}</h3>
                 </div>
-
-                <div class="panel-body">
-                    <div class="col-xs-4">
+                <div class="box-body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <form class="form-add-director" method="POST" action="/directors/save/{{ $director->id }}">
                             {!! csrf_field() !!}
                             <input type="hidden" id="driver_check" name="driver_check" value="{{ $catalog->driver }}" />
@@ -390,48 +394,48 @@
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Save</button>
-                                <button type="submit" class="btn btn-info" disabled><i class="fa fa-btn fa-sign-in"></i>Test Connection</button>
+                                <button type="submit" class="btn btn-flat btn-primary" style="margin-right: 10px;"><strong>Save</strong></button>
+                                <button type="submit" class="btn btn-flat btn-info" disabled><strong><i class="fa fa-btn fa-sign-in"></i> Test Connection</strong></button>
                             </div>
                         </form>
                         <div class="form-group" style="margin-top: 15px;">
-                            <button class="btn btn-danger" data-record-id="{{ $director->id }}" data-record-title="{{ $director->director_name }}" data-toggle="modal" data-target="#confirm-director-delete">Delete</button>
+                            <button class="btn btn-flat btn-danger" data-record-id="{{ $director->id }}" data-record-title="{{ $director->director_name }}" data-toggle="modal" data-target="#confirm-director-delete"><strong>Delete</strong></button>
                         </div>
-                        <div class="modal fade" id="confirm-director-delete" tabindex="-1" role="dialog" aria-labelledby="directorDelete" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title" id="directorDelete">Confirm Delete</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>You are about to delete <b>{{ $director->director_name }}</b>, this procedure is irreversible.</p>
-                                        <p>Do you want to proceed?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger btn-ok">Delete</button>
-                                    </div>
+                    </div>
+                    <div class="modal fade" id="confirm-director-delete" tabindex="-1" role="dialog" aria-labelledby="directorDelete" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title" id="directorDelete">Confirm Delete</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>You are about to delete <b>{{ $director->director_name }}</b>, this procedure is irreversible.</p>
+                                    <p>Do you want to proceed?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-flat btn-default" data-dismiss="modal"><strong>Cancel</strong></button>
+                                    <button type="button" class="btn btn-flat btn-danger btn-ok"><strong>Delete</strong></button>
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            (function($){
-                                $(document).ready(function(){
-                                    $('#confirm-director-delete').on('click', '.btn-ok', function(e) {
-                                        var $modalDiv = $(e.delegateTarget);
-                                        var id = $(this).data('recordId');
-                                        $(location).attr('href', '/directors/delete/' + id);
-                                    });
-                                    $('#confirm-director-delete').on('show.bs.modal', function(e) {
-                                        var data = $(e.relatedTarget).data();
-                                        $('.title', this).text(data.recordTitle);
-                                        $('.btn-ok', this).data('recordId', data.recordId);
-                                    });
-                                });
-                            })(jQuery);
-                        </script>
                     </div>
+                    <script>
+                        (function($){
+                            $(document).ready(function(){
+                                $('#confirm-director-delete').on('click', '.btn-ok', function(e) {
+                                    var $modalDiv = $(e.delegateTarget);
+                                    var id = $(this).data('recordId');
+                                    $(location).attr('href', '/directors/delete/' + id);
+                                });
+                                $('#confirm-director-delete').on('show.bs.modal', function(e) {
+                                    var data = $(e.relatedTarget).data();
+                                    $('.title', this).text(data.recordTitle);
+                                    $('.btn-ok', this).data('recordId', data.recordId);
+                                });
+                            });
+                        })(jQuery);
+                    </script>
                 </div>
             </div>
         </div>

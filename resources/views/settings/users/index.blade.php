@@ -13,22 +13,19 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>Users / Bareos Reporter</title>
+@section('head-title')
+    Users / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1>Users</h1>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Users</h3>
-                </div>
-
-                <div class="panel-body">
-                    <div class="add-button">
-                        <a href="/settings/users/add"><button class="btn btn-primary" name="action" value="add">Add User</button></a>
-                    </div>
+            <div class="box box-primary">
+                <div class="box-body">
                     <div class="users-wrap">
                         <table id="users-table" class="table table-bordered">
                             <thead>
@@ -52,6 +49,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="add-button">
+                            <a href="/settings/users/add"><button class="btn btn-flat btn-primary" name="action" value="add"><strong>Add User</strong></button></a>
+                        </div>
                     </div>
                 </div>
             </div>
