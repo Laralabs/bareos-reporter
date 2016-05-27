@@ -13,5 +13,4 @@
 ?>
 <script type="text/javascript" src="/js/bootstrap-select.js"></script>
 <script type="text/javascript" src="/js/director.js"></script>
-<script type="text/javascript" src="/js/deleteModal.js"></script>
 <script type="text/javascript" src="/js/adminlte.js"></script>

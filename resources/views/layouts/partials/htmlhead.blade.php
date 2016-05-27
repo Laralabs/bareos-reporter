@@ -28,7 +28,6 @@
     <link rel="stylesheet" type="text/css" href="/css/ionicons.css" />
     <link rel="stylesheet" type="text/css" href="/css/dataTables.css" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css" />
-    <link rel="stylesheet" type="text/css" href="/css/select2.css" />
 
     <!-- JavaScripts -->
     <script type="text/javascript" src="/js/jquery.js"></script>
