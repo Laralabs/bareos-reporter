@@ -17,6 +17,7 @@ class CreateSchedulesOptionsTable extends Migration
             $table->string('type');
             $table->string('name');
             $table->string('display_name');
+            $table->boolean('enabled')->default(0);
         });
 
         DB::unprepared(file_get_contents('database/migrations/data/schedules_options_data.sql'));

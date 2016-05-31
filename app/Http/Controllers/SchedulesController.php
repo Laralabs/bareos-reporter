@@ -53,8 +53,8 @@ class SchedulesController extends Controller
      */
     public function add()
     {
-        $frequencies = SchedulesOptions::all()->where('type', 'freq');
-        $add_frequencies = SchedulesOptions::all()->where('type', 'add_freq');
+        $frequencies = SchedulesOptions::all()->where('type', 'freq')->where('enabled', 1);
+        $add_frequencies = SchedulesOptions::all()->where('type', 'add_freq')->where('enabled', 1);
 
         return view('schedules.add', ['frequencies' => $frequencies, 'add_frequencies' => $add_frequencies]);
     }
