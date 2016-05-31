@@ -10,6 +10,8 @@
  * @author Matt Clinton <matt@laralabs.uk>
  * @website http://www.laralabs.uk/
  */
+
+$active_director = \Illuminate\Support\Facades\Session::get('active_director');
 ?>
 <aside class="main-sidebar">
     <!-- Sidebar -->
