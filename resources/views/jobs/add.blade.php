@@ -13,22 +13,22 @@
 ?>
 @extends('layouts.app')
 
-@section('head')
-    <title>{{ $director->director_name }} Add Job / Bareos Reporter</title>
+@section('head-title')
+    {{ $director->director_name }} Add Job / Bareos Reporter
+@endsection
+
+@section('content-header')
+    <h1><span style="text-transform: uppercase">{{ $director->director_name }}</span> Jobs</h1>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                     <h3 class="panel-title">Add Job</h3>
-                </div>
-
-                <div class="panel-body">
+            <div class="box box-primary">
+                <div class="box-body">
                     <form class="form-add-job" method="POST" action="/jobs/{{ $director->id }}/create">
                         {!! csrf_field() !!}
-                        <div class="col-xs-6 col-md-4 col-lg-4">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
@@ -189,7 +189,7 @@
                                 @endif
                             </div>
                             <div class="form-group" style="margin-top: 30px;">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-flat btn-primary"><strong>Save</strong></button>
                             </div>
                         </div>
                     </form>
