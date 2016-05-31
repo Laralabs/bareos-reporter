@@ -5860,6 +5860,10 @@ button {
       .dropdown-menu li a:hover {
         background-color: #3C8DBC !important;
         color: #FFFFFF !important; }
+  .director-select .dropdown-menu {
+    border-right: 1px solid #CCCCCC !important; }
+    .director-select .dropdown-menu ul {
+      border-right: 0 !important; }
   .section-heading h4 {
     margin-bottom: 0 !important; }
   .section-heading hr {
@@ -5891,6 +5895,8 @@ button {
     .director-select-wrapper #director-select-form .director-select-wrap {
       display: inline-block; }
       .director-select-wrapper #director-select-form .director-select-wrap .bootstrap-select button {
+        border: 1px solid #3C8DBC !important;
+        border-radius: 0;
         width: 120px; } }
 
 @media screen and (min-width: 410px) {
@@ -5906,6 +5912,8 @@ button {
     .director-select-wrapper #director-select-form .director-select-wrap {
       display: inline-block; }
       .director-select-wrapper #director-select-form .director-select-wrap .bootstrap-select button {
+        border: 1px solid #3C8DBC !important;
+        border-radius: 0 !important;
         width: 150px; } }
 
 @media screen and (min-width: 767px) {

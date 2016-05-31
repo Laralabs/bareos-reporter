@@ -209,6 +209,17 @@ button {
     }
   }
 
+  .director-select {
+
+    .dropdown-menu {
+      border-right: 1px solid #CCCCCC !important;
+
+      ul {
+        border-right: 0 !important;
+      }
+    }
+  }
+
   .section-heading {
 
     h4 {
@@ -268,7 +279,8 @@ button {
         .bootstrap-select {
 
           button {
-
+            border: 1px solid #3C8DBC !important;
+            border-radius: 0;
             width: 120px;
           }
         }
@@ -302,7 +314,8 @@ button {
         .bootstrap-select {
 
           button {
-
+            border: 1px solid #3C8DBC !important;
+            border-radius: 0 !important;
             width: 150px;
           }
         }
